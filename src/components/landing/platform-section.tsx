@@ -1,15 +1,9 @@
-"use client";
-
-import { AnimateOnScroll, SectionHeader } from "@/components/landing/motion";
-import { PlatformCarousel } from "@/components/landing/platform-carousel";
+import { PlatformStickyScroll } from "@/components/landing/platform-sticky-scroll";
+import { SectionHeader } from "@/components/landing/motion";
 
 export function PlatformSection() {
   return (
-    <section id="plataforma" className="py-24 relative overflow-hidden">
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none"
-        aria-hidden
-      />
+    <section id="plataforma" className="section-spacing relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           badge="Plataforma"
@@ -19,12 +13,10 @@ export function PlatformSection() {
               <span className="gradient-text-animated">visão completa</span>
             </>
           }
-          description="Interface moderna e intuitiva que funciona perfeitamente em desktop e dispositivos móveis. Selecione um sistema para explorar."
+          description="Role para explorar cada sistema da plataforma. A interface acompanha o conteúdo em tempo real."
         />
 
-        <AnimateOnScroll direction="scale" duration={900}>
-          <PlatformCarousel />
-        </AnimateOnScroll>
+        <PlatformStickyScroll />
       </div>
     </section>
   );

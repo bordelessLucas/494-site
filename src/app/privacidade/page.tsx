@@ -12,16 +12,16 @@ export default function PrivacidadePage() {
     <div className="min-h-screen bg-[#0A0A0F] text-white">
       <Navbar />
       <main id="main-content" className="container mx-auto px-4 pt-28 pb-24 max-w-3xl">
-        <h1 className="font-display font-bold text-3xl md:text-4xl mb-8">
+        <h1 className="heading-page mb-8">
           Política de Privacidade
         </h1>
-        <div className="prose prose-invert prose-sm max-w-none space-y-6 text-gray-400 leading-relaxed">
+        <div className="prose prose-invert prose-sm max-w-none space-y-6 text-gray-400">
           <p>
             A Unique Gestor está comprometida com a proteção dos dados pessoais
             em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº
             13.709/2018).
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Dados coletados
           </h2>
           <p>
@@ -29,7 +29,7 @@ export default function PrivacidadePage() {
             empresa) fornecidos voluntariamente em formulários, demonstrações e
             contratação do serviço.
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Finalidade do tratamento
           </h2>
           <p>
@@ -37,7 +37,7 @@ export default function PrivacidadePage() {
             suporte técnico, melhoria da plataforma e cumprimento de obrigações
             legais.
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Seus direitos
           </h2>
           <p>
@@ -49,7 +49,7 @@ export default function PrivacidadePage() {
             </a>
             .
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Segurança
           </h2>
           <p>

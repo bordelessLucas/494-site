@@ -32,10 +32,10 @@ export function SolutionPage({ solution }: { solution: Solution }) {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="font-display font-extrabold text-4xl md:text-5xl leading-tight mb-6">
+                <h1 className="heading-hero mb-6">
                   {solution.title}
                 </h1>
-                <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                <p className="text-gray-400 text-lg mb-8">
                   {solution.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -76,7 +76,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
 
         <section className="py-16 border-t border-white/5">
           <div className="container mx-auto px-4 max-w-3xl">
-            <h2 className="font-display font-bold text-2xl md:text-3xl mb-8">
+            <h2 className="heading-section text-2xl md:text-3xl mb-8">
               Principais benefícios
             </h2>
             <ul className="space-y-4">
@@ -92,7 +92,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
 
         <section className="py-16 border-t border-white/5">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="font-display font-bold text-2xl md:text-3xl mb-4">
+            <h2 className="heading-section text-2xl md:text-3xl mb-4">
               Pronto para conhecer o {solution.title}?
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">

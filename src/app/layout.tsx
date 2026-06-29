@@ -1,3 +1,4 @@
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -17,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Unique Gestor — Plataforma de Gestão Integrada",
   description:
-    "Gestão Societária, Contratos (SGC) e Escalas Médicas em uma única plataforma. Automatize processos, garanta conformidade LGPD e escale sua operação.",
+    "Gestão Societária, SGC (Contratos) e Unique Escalas em uma única plataforma. Automatize processos, garanta conformidade LGPD e escale sua operação.",
   keywords: [
     "gestão societária",
     "gestão de contratos",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Unique Gestor — Plataforma de Gestão Integrada",
     description:
-      "Três soluções poderosas em uma única plataforma para simplificar sua operação.",
+      "Três sistemas poderosos em uma única plataforma para simplificar sua operação.",
     type: "website",
     locale: "pt_BR",
     siteName: "Unique Gestor",
@@ -45,13 +46,15 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-blue-600 focus:text-white focus:outline-none"
-        >
-          Pular para o conteúdo
-        </a>
-        {children}
+        <SmoothScrollProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-[#4d7cff] focus:text-white focus:outline-none"
+          >
+            Pular para o conteúdo
+          </a>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );

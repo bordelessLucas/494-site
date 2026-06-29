@@ -1,7 +1,15 @@
 "use client";
 
+import {
+  directionVariants,
+  EASE_OUT,
+  inViewProps,
+  motionTransition,
+  pulseSoftKeyframes,
+  pulseSoftTransition,
+} from "@/lib/motion";
 import { cn } from "@/lib/utils";
-import { useInView } from "@/hooks/use-in-view";
+import { motion, useReducedMotion } from "framer-motion";
 import { type ReactNode } from "react";
 
 type AnimationDirection = "up" | "down" | "left" | "right" | "fade" | "scale";
@@ -15,15 +23,6 @@ interface AnimateOnScrollProps {
   once?: boolean;
 }
 
-const hiddenTransforms: Record<AnimationDirection, string> = {
-  up: "translate-y-10",
-  down: "-translate-y-10",
-  left: "translate-x-10",
-  right: "-translate-x-10",
-  fade: "",
-  scale: "scale-[0.96]",
-};
-
 export function AnimateOnScroll({
   children,
   className,
@@ -32,25 +31,23 @@ export function AnimateOnScroll({
   duration = 700,
   once = true,
 }: AnimateOnScrollProps) {
-  const { ref, isInView } = useInView({ once });
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "transition-all ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]",
-        isInView
-          ? "opacity-100 translate-x-0 translate-y-0 scale-100"
-          : cn("opacity-0", hiddenTransforms[direction]),
-        className,
-      )}
-      style={{
-        transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`,
+    <motion.div
+      className={cn("will-change-[transform,opacity]", className)}
+      variants={directionVariants[direction]}
+      initial={prefersReducedMotion ? false : "hidden"}
+      whileInView={prefersReducedMotion ? undefined : "visible"}
+      viewport={{ once, margin: "-60px", amount: 0.15 }}
+      transition={{
+        duration: duration / 1000,
+        delay: delay / 1000,
+        ease: EASE_OUT,
       }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -67,20 +64,31 @@ export function SectionHeader({
   description,
   className,
 }: SectionHeaderProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <AnimateOnScroll className={cn("text-center mb-16", className)}>
+    <motion.div
+      className={cn("text-center mb-20 md:mb-24", className)}
+      variants={directionVariants.up}
+      transition={motionTransition()}
+      {...(prefersReducedMotion ? {} : inViewProps)}
+    >
       {badge && (
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card-premium text-xs font-medium text-gray-400 uppercase tracking-widest mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse-soft" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card-premium text-[11px] font-medium text-gray-500 uppercase tracking-[0.2em] mb-8">
+          <motion.span
+            className="w-1 h-1 rounded-full bg-white/40"
+            animate={prefersReducedMotion ? undefined : pulseSoftKeyframes}
+            transition={prefersReducedMotion ? undefined : pulseSoftTransition}
+          />
           {badge}
         </div>
       )}
-      <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-4 tracking-tight">
+      <h2 className="heading-section tracking-tight mb-6">
         {title}
       </h2>
-      <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+      <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto body-relaxed">
         {description}
       </p>
-    </AnimateOnScroll>
+    </motion.div>
   );
 }

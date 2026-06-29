@@ -14,8 +14,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#0A0A0F] text-white">
       <Navbar />
       <main id="main-content" className="container mx-auto px-4 pt-32 pb-24 max-w-md text-center">
-        <h1 className="font-display font-bold text-3xl mb-4">Área do cliente</h1>
-        <p className="text-gray-400 mb-8 leading-relaxed">
+        <h1 className="heading-page mb-4">Área do cliente</h1>
+        <p className="text-gray-400 mb-8">
           O portal de acesso à plataforma está em implantação. Entre em contato
           com nossa equipe para obter suas credenciais de acesso.
         </p>

@@ -12,16 +12,16 @@ export default function TermosPage() {
     <div className="min-h-screen bg-[#0A0A0F] text-white">
       <Navbar />
       <main id="main-content" className="container mx-auto px-4 pt-28 pb-24 max-w-3xl">
-        <h1 className="font-display font-bold text-3xl md:text-4xl mb-8">
+        <h1 className="heading-page mb-8">
           Termos de Uso
         </h1>
-        <div className="prose prose-invert prose-sm max-w-none space-y-6 text-gray-400 leading-relaxed">
+        <div className="prose prose-invert prose-sm max-w-none space-y-6 text-gray-400">
           <p>
             Ao utilizar a plataforma Unique Gestor, você concorda com estes termos.
             O serviço é oferecido sob modelo SaaS (Software as a Service), com
             acesso mediante contrato ou período de avaliação autorizado.
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Uso da plataforma
           </h2>
           <p>
@@ -29,7 +29,7 @@ export default function TermosPage() {
             uso adequado das funcionalidades, em conformidade com a legislação
             vigente e políticas internas de sua organização.
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Disponibilidade e SLA
           </h2>
           <p>
@@ -37,7 +37,7 @@ export default function TermosPage() {
             de serviço (SLA) específicos são definidos no contrato comercial
             conforme o plano contratado.
           </p>
-          <h2 className="font-display font-semibold text-xl text-white">
+          <h2 className="text-xl text-white">
             Propriedade intelectual
           </h2>
           <p>

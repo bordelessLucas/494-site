@@ -1,11 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { LineIcon } from "@/components/ui/icon";
 import { ContactInfoCards } from "@/components/landing/contact-info-cards";
 import { AnimateOnScroll, SectionHeader } from "@/components/landing/motion";
 import { FORM_STEPS } from "@/lib/data";
+import { fadeUpVariants, motionTransition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { formatPhone, validateStep1 } from "@/lib/validation";
+import { motion } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
@@ -41,7 +44,7 @@ const MODULES = [
 ] as const;
 
 const inputClass =
-  "w-full px-4 py-3 rounded-lg bg-white/5 border text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/[0.07] transition-all";
+  "w-full px-4 py-3 rounded-lg input-minimal text-white placeholder-gray-600 transition-all";
 
 export function ContactSection() {
   const [step, setStep] = useState(1);
@@ -140,9 +143,9 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contato" className="py-24 relative">
+    <section id="contato" className="section-spacing relative">
       <div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/5 to-transparent pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         aria-hidden
       />
       <div className="container mx-auto px-4 relative z-10">
@@ -172,8 +175,8 @@ export function ContactSection() {
                     className={cn(
                       "w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm transition-all duration-300",
                       step >= formStep.number
-                        ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white scale-110"
-                        : "bg-white/5 border border-white/10 text-gray-500",
+                        ? "bg-white/[0.06] text-white"
+                        : "bg-white/[0.02] text-gray-600",
                     )}
                     aria-current={step === formStep.number ? "step" : undefined}
                   >
@@ -192,7 +195,7 @@ export function ContactSection() {
                   <div
                     className={cn(
                       "w-8 sm:w-16 md:w-24 h-0.5 mx-1 sm:mx-2 mb-4 sm:mb-0 transition-colors duration-300",
-                      step > formStep.number ? "bg-blue-500/50" : "bg-white/10",
+                      step > formStep.number ? "bg-white/10" : "bg-white/[0.03]",
                     )}
                     aria-hidden
                   />
@@ -201,7 +204,7 @@ export function ContactSection() {
             ))}
           </div>
 
-          <div className="glass-card rounded-2xl p-8 md:p-10">
+          <div className="glass-card-premium rounded-2xl p-8 md:p-10">
             {isSubmitted ? (
               <div className="text-center py-12">
                 <h3 className="font-display font-semibold text-2xl mb-2">
@@ -214,7 +217,14 @@ export function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} noValidate>
                 {step === 1 && (
-                  <div className="space-y-5 animate-fade-up">
+                  <motion.div
+                    key="step-1"
+                    className="space-y-5"
+                    variants={fadeUpVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={motionTransition()}
+                  >
                     <div className="mb-6">
                       <h3 className="font-display font-semibold text-xl mb-1">
                         Seus dados
@@ -234,7 +244,7 @@ export function ContactSection() {
                           type="text"
                           value={formData.name}
                           onChange={(e) => updateField("name", e.target.value)}
-                          className={cn(inputClass, errors.name ? "border-red-500/50" : "border-white/10")}
+                          className={cn(inputClass, errors.name && "ring-1 ring-red-500/30")}
                           placeholder="Seu nome completo"
                           aria-invalid={!!errors.name}
                         />
@@ -251,7 +261,7 @@ export function ContactSection() {
                           type="email"
                           value={formData.email}
                           onChange={(e) => updateField("email", e.target.value)}
-                          className={cn(inputClass, errors.email ? "border-red-500/50" : "border-white/10")}
+                          className={cn(inputClass, errors.email && "ring-1 ring-red-500/30")}
                           placeholder="email@empresa.com.br"
                           aria-invalid={!!errors.email}
                         />
@@ -270,7 +280,7 @@ export function ContactSection() {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => updateField("phone", formatPhone(e.target.value))}
-                          className={cn(inputClass, errors.phone ? "border-red-500/50" : "border-white/10")}
+                          className={cn(inputClass, errors.phone && "ring-1 ring-red-500/30")}
                           placeholder="(11) 9 0000-0000"
                           aria-invalid={!!errors.phone}
                         />
@@ -287,7 +297,7 @@ export function ContactSection() {
                           type="text"
                           value={formData.company}
                           onChange={(e) => updateField("company", e.target.value)}
-                          className={cn(inputClass, "border-white/10")}
+                          className={inputClass}
                           placeholder="Nome da empresa"
                         />
                       </div>
@@ -302,7 +312,7 @@ export function ContactSection() {
                           type="text"
                           value={formData.role}
                           onChange={(e) => updateField("role", e.target.value)}
-                          className={cn(inputClass, "border-white/10")}
+                          className={inputClass}
                           placeholder="Seu cargo"
                         />
                       </div>
@@ -314,7 +324,7 @@ export function ContactSection() {
                           id="employees"
                           value={formData.employees}
                           onChange={(e) => updateField("employees", e.target.value)}
-                          className={cn(inputClass, "border-white/10")}
+                          className={inputClass}
                         >
                           <option value="" className="bg-gray-900">Selecione</option>
                           <option value="1-10" className="bg-gray-900">1 a 10</option>
@@ -325,11 +335,18 @@ export function ContactSection() {
                         </select>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {step === 2 && (
-                  <div className="space-y-5 animate-fade-up">
+                  <motion.div
+                    key="step-2"
+                    className="space-y-5"
+                    variants={fadeUpVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={motionTransition()}
+                  >
                     <div className="mb-6">
                       <h3 className="font-display font-semibold text-xl mb-1">
                         Módulos de interesse
@@ -345,10 +362,10 @@ export function ContactSection() {
                           type="button"
                           onClick={() => toggleModule(module)}
                           className={cn(
-                            "p-4 rounded-xl border text-sm text-left transition-all",
+                            "p-4 rounded-xl text-sm text-left transition-all",
                             formData.modules.includes(module)
-                              ? "border-blue-500/50 bg-blue-500/10 text-white"
-                              : "border-white/10 bg-white/5 text-gray-400 hover:border-white/20",
+                              ? "bg-white/[0.04] text-white"
+                              : "bg-white/[0.015] text-gray-500 hover:bg-white/[0.03]",
                           )}
                         >
                           {module}
@@ -358,11 +375,18 @@ export function ContactSection() {
                     {errors.modules && (
                       <p className="text-red-400 text-xs">{errors.modules}</p>
                     )}
-                  </div>
+                  </motion.div>
                 )}
 
                 {step === 3 && (
-                  <div className="space-y-5 animate-fade-up">
+                  <motion.div
+                    key="step-3"
+                    className="space-y-5"
+                    variants={fadeUpVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={motionTransition()}
+                  >
                     <div className="mb-6">
                       <h3 className="font-display font-semibold text-xl mb-1">
                         Mensagem adicional
@@ -376,7 +400,7 @@ export function ContactSection() {
                       rows={5}
                       value={formData.message}
                       onChange={(e) => updateField("message", e.target.value)}
-                      className={cn(inputClass, "border-white/10 resize-none")}
+                      className={cn(inputClass, "resize-none")}
                       placeholder="Descreva seus desafios ou dúvidas..."
                     />
                     <label className="flex items-start gap-3 cursor-pointer group">
@@ -384,7 +408,7 @@ export function ContactSection() {
                         type="checkbox"
                         checked={formData.lgpdConsent}
                         onChange={(e) => updateField("lgpdConsent", e.target.checked)}
-                        className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5 text-blue-600 focus:ring-blue-500/50"
+                        className="mt-1 w-4 h-4 rounded bg-white/[0.03] text-white focus:ring-white/20"
                       />
                       <span className="text-sm text-gray-400 group-hover:text-gray-300">
                         Li e concordo com a{" "}
@@ -397,14 +421,15 @@ export function ContactSection() {
                     {errors.lgpdConsent && (
                       <p className="text-red-400 text-xs">{errors.lgpdConsent}</p>
                     )}
-                  </div>
+                  </motion.div>
                 )}
 
                 {submitError && (
                   <p className="text-red-400 text-sm mt-4 text-center">{submitError}</p>
                 )}
 
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5">
+                <div className="flex items-center justify-between mt-8 pt-6 relative">
+                  <div className="divider-gradient absolute top-0 left-0 right-0" aria-hidden />
                   {step > 1 ? (
                     <Button
                       type="button"
@@ -425,7 +450,7 @@ export function ContactSection() {
                       onClick={handleNext}
                     >
                       Próximo
-                      <ArrowRight className="ml-2 w-4 h-4" aria-hidden />
+                      <LineIcon icon={ArrowRight} aria-hidden />
                     </Button>
                   ) : (
                     <Button
@@ -436,7 +461,11 @@ export function ContactSection() {
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin" aria-hidden />
+                          <LineIcon
+                            icon={Loader2}
+                            className="animate-spin"
+                            aria-hidden
+                          />
                           Enviando...
                         </>
                       ) : (

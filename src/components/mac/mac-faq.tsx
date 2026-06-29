@@ -1,0 +1,75 @@
+"use client";
+
+import { MacPillButton } from "@/components/mac/mac-pill-button";
+import { LANDING_FAQ_ITEMS } from "@/lib/landing-data";
+import { cn } from "@/lib/utils";
+import { Minus, Plus } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+
+export function MacFaq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section id="faq" className="mac-section">
+      <div className="mac-container">
+        <div className="mac-card grid grid-cols-1 gap-12 p-8 md:p-12 lg:grid-cols-2 lg:gap-20 lg:p-16">
+          <div>
+            <h2 className="mac-heading-lg text-white">Perguntas frequentes</h2>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-zinc-400">
+              Tire suas dúvidas sobre a plataforma Unique Gestor, os três
+              sistemas e como começar.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-5">
+              <MacPillButton variant="outline">Mais perguntas</MacPillButton>
+              <Link
+                href="#contato"
+                className="text-sm font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
+              >
+                Fale conosco
+              </Link>
+            </div>
+          </div>
+
+          <div className="divide-y divide-white/[0.08]">
+            {LANDING_FAQ_ITEMS.map((item, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+                <div key={item.question} className="py-5 first:pt-0">
+                  <button
+                    type="button"
+                    className="flex w-full items-start justify-between gap-4 text-left"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-display text-base font-semibold text-white md:text-lg">
+                      {item.question}
+                    </span>
+                    <span className="mt-0.5 flex-shrink-0 text-zinc-400">
+                      {isOpen ? (
+                        <Minus className="h-5 w-5" strokeWidth={1.5} />
+                      ) : (
+                        <Plus className="h-5 w-5" strokeWidth={1.5} />
+                      )}
+                    </span>
+                  </button>
+                  <div
+                    className={cn(
+                      "overflow-hidden transition-all duration-300",
+                      isOpen ? "max-h-56 opacity-100" : "max-h-0 opacity-0",
+                    )}
+                  >
+                    <p className="pt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

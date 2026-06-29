@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@splidejs/react-splide": "^0.7.12",
-    "@splidejs/splide": "^4.1.4",
+    "@studio-freight/react-lenis": "^0.0.47",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.42.0",
     "lucide-react": "^0.511.0",
     "next": "^15.3.3",
     "react": "^19.1.0",
