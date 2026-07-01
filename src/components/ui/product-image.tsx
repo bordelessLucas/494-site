@@ -33,6 +33,7 @@ export function ProductImage({
         {...props}
         fill={fill}
         alt={alt}
+        loading={props.priority ? undefined : "lazy"}
         onLoad={() => setIsLoaded(true)}
         className={cn(
           className,

@@ -33,7 +33,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
   body {
@@ -43,7 +43,6 @@
       var(--color-surface-center) 0%,
       var(--color-surface-edge) 100%
     );
-    background-attachment: fixed;
   }
 
   h1 {
@@ -546,13 +545,16 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    contain: strict;
+    transform: translateZ(0);
   }
 
   .mac-orb {
     position: absolute;
     border-radius: 9999px;
-    filter: blur(80px);
-    opacity: 0.45;
+    filter: blur(64px);
+    opacity: 0.4;
+    transform: translateZ(0);
   }
 
   .mac-orb-blue {
@@ -576,9 +578,17 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.12;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: soft-light;
+    opacity: 0.05;
+    contain: strict;
+    transform: translateZ(0);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  @media (max-width: 768px) {
+    .mac-grain {
+      display: none;
+    }
   }
 
   .mac-gradient-bg {
@@ -611,7 +621,7 @@
   }
 
   .mac-card {
-    @apply rounded-[32px] border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm;
+    @apply rounded-[32px] border border-white/[0.08] bg-[#12121a]/90;
   }
 
   .mac-card-muted {
@@ -671,6 +681,7 @@
 @media (prefers-reduced-motion: reduce) {
   .gradient-text-animated,
   .orb,
+  .mac-grain,
   .btn-shimmer::before,
   .skeleton-dark,
   .skeleton-mac,
@@ -678,5 +689,9 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .mac-grain {
+    display: none;
   }
 }

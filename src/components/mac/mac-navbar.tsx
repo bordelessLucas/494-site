@@ -12,7 +12,19 @@ export function MacNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 12;
+        setIsScrolled((prev) => (prev === scrolled ? prev : scrolled));
+        ticking = false;
+      });
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -21,8 +33,8 @@ export function MacNavbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        isScrolled && "border-b border-white/[0.06] bg-[#050508]/85 backdrop-blur-md",
+        "sticky top-0 z-50 transition-[background-color,border-color] duration-300",
+        isScrolled && "border-b border-white/[0.06] bg-[#050508]/92",
       )}
     >
       <div className="mac-container flex h-[72px] items-center justify-between gap-8">
