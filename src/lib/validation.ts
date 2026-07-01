@@ -41,6 +41,46 @@ export function formatPhone(value: string): string {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 }
 
+const phoneFieldSchema = z
+  .string()
+  .min(10, "Informe um telefone válido")
+  .refine((phone) => phoneRegex.test(normalizePhone(phone)), {
+    message: "Formato: (11) 9 0000-0000",
+  });
+
+export const demoFormSchema = z.object({
+  solution: z.string().min(1, "Selecione uma solução"),
+  name: z.string().min(2, "Informe seu nome completo"),
+  email: z.string().email("Informe um e-mail válido"),
+  phone: phoneFieldSchema,
+  scheduledDate: z.string().min(1, "Selecione uma data"),
+  scheduledTime: z.string().min(1, "Selecione um horário"),
+});
+
+export type DemoFormInput = z.infer<typeof demoFormSchema>;
+
+export function validateDemoStep1(
+  data: Pick<DemoFormInput, "solution" | "name" | "email" | "phone">,
+) {
+  const errors: Record<string, string> = {};
+
+  const solutionResult = demoFormSchema.shape.solution.safeParse(data.solution);
+  if (!solutionResult.success) errors.solution = "Selecione uma solução";
+
+  const nameResult = demoFormSchema.shape.name.safeParse(data.name.trim());
+  if (!nameResult.success) errors.name = "Informe seu nome completo";
+
+  const emailResult = demoFormSchema.shape.email.safeParse(data.email.trim());
+  if (!emailResult.success)
+    errors.email = emailResult.error.errors[0]?.message ?? "E-mail inválido";
+
+  const phoneResult = phoneFieldSchema.safeParse(data.phone.trim());
+  if (!phoneResult.success)
+    errors.phone = phoneResult.error.errors[0]?.message ?? "Telefone inválido";
+
+  return errors;
+}
+
 export function validateStep1(data: Pick<ContactFormInput, "name" | "email" | "phone">) {
   const errors: Record<string, string> = {};
   const nameResult = z.string().min(2).safeParse(data.name.trim());

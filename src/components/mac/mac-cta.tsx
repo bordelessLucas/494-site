@@ -1,7 +1,6 @@
-import { MacPillButton } from "@/components/mac/mac-pill-button";
+import { OpenDemoButton } from "@/components/demo/open-demo-button";
 import { LANDING_CTA } from "@/lib/landing-data";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 export function MacCta() {
   return (
@@ -21,12 +20,10 @@ export function MacCta() {
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-[2.75rem]">
               {LANDING_CTA.title}
             </h2>
-            <Link href="#contato">
-              <MacPillButton variant="light" className="gap-2 px-7 font-semibold">
-                {LANDING_CTA.button}
-                <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-              </MacPillButton>
-            </Link>
+            <OpenDemoButton variant="light" className="gap-2 px-7 font-semibold">
+              {LANDING_CTA.button}
+              <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+            </OpenDemoButton>
           </div>
         </div>
       </div>

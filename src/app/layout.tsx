@@ -1,3 +1,4 @@
+import { DemoModalProvider } from "@/components/demo/demo-modal-provider";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
@@ -47,13 +48,15 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans">
         <SmoothScrollProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-[#4d7cff] focus:text-white focus:outline-none"
-          >
-            Pular para o conteúdo
-          </a>
-          {children}
+          <DemoModalProvider>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-md focus:bg-[#4d7cff] focus:text-white focus:outline-none"
+            >
+              Pular para o conteúdo
+            </a>
+            {children}
+          </DemoModalProvider>
         </SmoothScrollProvider>
       </body>
     </html>

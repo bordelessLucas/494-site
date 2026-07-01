@@ -1,3 +1,4 @@
+import { OpenDemoButton } from "@/components/demo/open-demo-button";
 import { MacPillButton } from "@/components/mac/mac-pill-button";
 import {
   LANDING_HERO,
@@ -93,10 +94,10 @@ export function MacHero() {
               {LANDING_HERO.subheadline}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5">
-              <MacPillButton variant="gradient" className="gap-2.5 px-6">
+              <OpenDemoButton variant="gradient" className="gap-2.5 px-6">
                 {LANDING_HERO.ctaPrimary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-              </MacPillButton>
+              </OpenDemoButton>
               <Link
                 href="#sistemas"
                 className="text-sm font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"

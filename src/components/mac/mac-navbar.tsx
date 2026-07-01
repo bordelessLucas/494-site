@@ -1,7 +1,7 @@
 "use client";
 
+import { OpenDemoButton } from "@/components/demo/open-demo-button";
 import { UniqueLogo } from "@/components/mac/mac-logo";
-import { MacPillButton } from "@/components/mac/mac-pill-button";
 import { LANDING_LOGIN_URL, LANDING_NAV_LINKS } from "@/lib/landing-data";
 import { cn } from "@/lib/utils";
 import { Bell, ChevronDown } from "lucide-react";
@@ -66,11 +66,9 @@ export function MacNavbar() {
               Entrar
             </span>
           </Link>
-          <Link href="#contato">
-            <MacPillButton variant="gradient" className="hidden px-5 sm:inline-flex">
-              Solicitar demo
-            </MacPillButton>
-          </Link>
+          <OpenDemoButton variant="gradient" className="hidden px-5 sm:inline-flex">
+            Solicitar demo
+          </OpenDemoButton>
           <Link href="#contato">
             <button
               type="button"
