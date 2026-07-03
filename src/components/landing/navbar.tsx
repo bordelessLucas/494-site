@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { LOGIN_URL, NAV_LINKS } from "@/lib/data";
+import { NAV_LINKS } from "@/lib/data";
 import { fadeUpVariants, motionTransition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -59,9 +59,6 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link href={LOGIN_URL}>
-            <Button variant="ghost">Entrar</Button>
-          </Link>
           <a href="#contato">
             <Button variant="gradient">Solicitar Demo</Button>
           </a>
@@ -121,11 +118,6 @@ export function Navbar() {
             ))}
             <div className="flex flex-col gap-2 pt-4 relative">
               <div className="divider-gradient absolute top-0 left-0 right-0" />
-              <Link href={LOGIN_URL} onClick={() => setIsMenuOpen(false)}>
-                <Button variant="ghost" className="w-full">
-                  Entrar
-                </Button>
-              </Link>
               <a
                 href="#contato"
                 onClick={() => setIsMenuOpen(false)}

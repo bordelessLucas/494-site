@@ -31,6 +31,9 @@ yarn-error.log*
 # env files
 .env*
 
+# demo requests storage
+/data/demo-requests.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

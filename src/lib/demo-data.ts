@@ -59,7 +59,13 @@ function isSlotUnavailable(date: Date, time: string): boolean {
   return seed % 5 === 0;
 }
 
-export function getAvailableDemoSlots(): DemoTimeSlot[] {
+export function getAvailableDemoSlots(
+  bookedSlots: Array<{ scheduledDate: string; scheduledTime: string }> = [],
+): DemoTimeSlot[] {
+  const bookedSet = new Set(
+    bookedSlots.map((slot) => `${slot.scheduledDate}:${slot.scheduledTime}`),
+  );
+
   const slots: DemoTimeSlot[] = [];
   const cursor = new Date();
   cursor.setHours(0, 0, 0, 0);
@@ -68,13 +74,15 @@ export function getAvailableDemoSlots(): DemoTimeSlot[] {
   while (slots.length < 8) {
     const day = cursor.getDay();
     if (day !== 0 && day !== 6) {
-      const availableTimes = DEMO_TIMES.filter(
-        (time) => !isSlotUnavailable(cursor, time),
-      );
+      const dateKey = toDateKey(cursor);
+      const availableTimes = DEMO_TIMES.filter((time) => {
+        if (isSlotUnavailable(cursor, time)) return false;
+        return !bookedSet.has(`${dateKey}:${time}`);
+      });
 
       if (availableTimes.length > 0) {
         slots.push({
-          date: toDateKey(cursor),
+          date: dateKey,
           dayLabel: formatDayLabel(cursor),
           weekday: WEEKDAYS[day],
           times: [...availableTimes],

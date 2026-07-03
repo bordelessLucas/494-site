@@ -59,6 +59,24 @@ export const demoFormSchema = z.object({
 
 export type DemoFormInput = z.infer<typeof demoFormSchema>;
 
+export const demoRequestStatusSchema = z.enum([
+  "pending",
+  "confirmed",
+  "cancelled",
+  "completed",
+]);
+
+export const updateDemoRequestSchema = z.object({
+  status: demoRequestStatusSchema.optional(),
+  notes: z.string().max(2000).optional(),
+});
+
+export type UpdateDemoRequestInput = z.infer<typeof updateDemoRequestSchema>;
+
+export const adminLoginSchema = z.object({
+  password: z.string().min(1, "Informe a senha"),
+});
+
 export function validateDemoStep1(
   data: Pick<DemoFormInput, "solution" | "name" | "email" | "phone">,
 ) {

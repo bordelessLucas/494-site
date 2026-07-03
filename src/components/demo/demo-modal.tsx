@@ -1,7 +1,7 @@
 "use client";
 
 import { MacPillButton } from "@/components/mac/mac-pill-button";
-import { DEMO_SOLUTIONS, getAvailableDemoSlots } from "@/lib/demo-data";
+import { DEMO_SOLUTIONS, type DemoTimeSlot } from "@/lib/demo-data";
 import { cn } from "@/lib/utils";
 import { formatPhone, validateDemoStep1 } from "@/lib/validation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -47,8 +47,9 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
   const [selectedTime, setSelectedTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [slots, setSlots] = useState<DemoTimeSlot[]>([]);
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
 
-  const slots = getAvailableDemoSlots();
   const selectedSlot = slots.find((slot) => slot.date === selectedDate);
 
   useEffect(() => {
@@ -61,7 +62,40 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
     setSelectedTime("");
     setSubmitError("");
     setIsSubmitting(false);
+    setSlots([]);
+    setIsLoadingSlots(false);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || step !== "calendar") return;
+
+    let isCancelled = false;
+
+    const loadSlots = async () => {
+      setIsLoadingSlots(true);
+      try {
+        const res = await fetch("/api/demo/slots");
+        const data = await res.json();
+        if (!isCancelled && res.ok) {
+          setSlots(data.slots ?? []);
+        }
+      } catch {
+        if (!isCancelled) {
+          setSubmitError("Não foi possível carregar os horários. Tente novamente.");
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsLoadingSlots(false);
+        }
+      }
+    };
+
+    void loadSlots();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [isOpen, step]);
 
   useEffect(() => {
     if (!selectedDate && slots.length > 0) {
@@ -306,6 +340,17 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                     </span>
                   </div>
 
+                  {isLoadingSlots ? (
+                    <div className="flex items-center justify-center gap-2 py-12 text-sm text-zinc-400">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Carregando horários...
+                    </div>
+                  ) : slots.length === 0 ? (
+                    <p className="py-8 text-center text-sm text-zinc-400">
+                      Nenhum horário disponível no momento. Tente novamente mais tarde.
+                    </p>
+                  ) : (
+                    <>
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-zinc-300">Datas disponíveis</p>
                     <div className="flex gap-2 overflow-x-auto pb-1">
@@ -391,7 +436,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                       variant="gradient"
                       className="flex-1 gap-2"
                       onClick={handleSchedule}
-                      disabled={isSubmitting || !selectedTime}
+                      disabled={isSubmitting || !selectedTime || isLoadingSlots}
                     >
                       {isSubmitting ? (
                         <>
@@ -406,6 +451,20 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                       )}
                     </MacPillButton>
                   </div>
+                    </>
+                  )}
+
+                  {(isLoadingSlots || slots.length === 0) && (
+                    <MacPillButton
+                      type="button"
+                      variant="outline"
+                      className="gap-2"
+                      onClick={() => setStep("form")}
+                    >
+                      <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
+                      Voltar
+                    </MacPillButton>
+                  )}
                 </div>
               )}
 
