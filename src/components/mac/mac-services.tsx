@@ -22,11 +22,6 @@ export function MacServices() {
             <p className="text-base leading-relaxed text-zinc-400">
               {LANDING_SOLUTIONS.description}
             </p>
-            <Link href="#sistemas">
-              <MacPillButton variant="outline" className="mt-6">
-                {LANDING_SOLUTIONS.cta}
-              </MacPillButton>
-            </Link>
           </div>
         </div>
 
@@ -36,14 +31,13 @@ export function MacServices() {
               key={item.id}
               className="mac-card group relative flex flex-col p-8"
             >
-              <div className="mb-8 flex items-center justify-between">
+              <div className="mb-8">
                 <div
                   className={cn(
                     "h-3 w-3 rounded-sm",
                     ACCENT_COLORS[item.accent],
                   )}
                 />
-                <span className="text-xs text-zinc-500">{item.readTime}</span>
               </div>
 
               <h3 className="font-display text-lg font-bold leading-snug tracking-tight text-white md:text-xl">
@@ -55,14 +49,9 @@ export function MacServices() {
 
               <Link
                 href={item.href}
-                className={cn(
-                  "mt-8 flex h-11 w-11 items-center justify-center self-end rounded-full transition-all",
-                  item.isFeatured
-                    ? "mac-gradient-bg text-white"
-                    : "border border-white/15 text-white group-hover:border-white/30 group-hover:bg-white/[0.06]",
-                )}
-                aria-label={`Saiba mais sobre ${item.title}`}
+                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[#4d7cff] transition-colors hover:text-white"
               >
+                {LANDING_SOLUTIONS.cta}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
               </Link>
             </article>

@@ -1,8 +1,19 @@
 export const DEMO_SOLUTIONS = [
-  { id: "societaria", label: "Gestão Societária" },
-  { id: "sgc", label: "SGC — Gestão de Contratos" },
-  { id: "escalas", label: "Unique Escalas" },
-  { id: "all", label: "Todos os sistemas" },
+  {
+    id: "societaria",
+    label: "Gestão Societária",
+    description: "Controle de sócios, atos e documentos corporativos",
+  },
+  {
+    id: "sgc",
+    label: "SGC — Gestão de Contratos",
+    description: "Contratos, aditivos, CNDs, financeiro e workflow",
+  },
+  {
+    id: "escalas",
+    label: "Unique Escalas",
+    description: "Escalas médicas, plantões e app mobile",
+  },
 ] as const;
 
 export type DemoSolutionId = (typeof DEMO_SOLUTIONS)[number]["id"];

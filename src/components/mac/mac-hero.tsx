@@ -2,10 +2,8 @@ import { OpenDemoButton } from "@/components/demo/open-demo-button";
 import { MacPillButton } from "@/components/mac/mac-pill-button";
 import {
   LANDING_HERO,
-  LANDING_TRUSTED_SEGMENTS,
 } from "@/lib/landing-data";
-import { ArrowRight, TrendingUp } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, Check, TrendingUp } from "lucide-react";
 
 const CHART_BARS = [
   { height: 56, color: "#4d7cff" },
@@ -86,40 +84,35 @@ export function MacHero() {
       <div className="mac-container">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           <div className="max-w-[540px]">
-            <h1 className="mac-heading-xl text-white">
-              {LANDING_HERO.headline}{" "}
-              <span className="mac-gradient-text">{LANDING_HERO.headlineAccent}</span>
+            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-zinc-300">
+              {LANDING_HERO.badge}
+            </span>
+            <h1 className="mac-heading-xl mt-6 text-white">
+              {LANDING_HERO.headline}
             </h1>
             <p className="mt-6 text-base leading-relaxed text-zinc-400 md:text-[1.05rem]">
               {LANDING_HERO.subheadline}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-5">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <OpenDemoButton variant="gradient" className="gap-2.5 px-6">
                 {LANDING_HERO.ctaPrimary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
               </OpenDemoButton>
-              <Link
-                href="#sistemas"
-                className="text-sm font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
-              >
+              <OpenDemoButton variant="outline" className="px-6">
                 {LANDING_HERO.ctaSecondary}
-              </Link>
+              </OpenDemoButton>
             </div>
 
-            <div className="mt-14 md:mt-16">
-              <p className="mb-5 text-sm text-zinc-500">
-                {LANDING_HERO.trustedLabel}
-              </p>
-              <div className="flex flex-wrap items-center gap-8 md:gap-10">
-                {LANDING_TRUSTED_SEGMENTS.map((segment) => (
-                  <span
-                    key={segment.name}
-                    className="font-display text-base font-semibold text-zinc-500"
-                  >
-                    {segment.display}
-                  </span>
-                ))}
-              </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              {LANDING_HERO.trustBadges.map((badge) => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center gap-1.5 text-sm text-zinc-400"
+                >
+                  <Check className="h-3.5 w-3.5 text-[#4d7cff]" strokeWidth={2} />
+                  {badge}
+                </span>
+              ))}
             </div>
           </div>
 

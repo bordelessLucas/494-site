@@ -18,7 +18,15 @@ export function MacTestimonial() {
   return (
     <section id="depoimentos" className="mac-section">
       <div className="mac-container">
-        <blockquote className="max-w-5xl font-display text-2xl font-bold leading-snug tracking-tight text-white md:text-3xl lg:text-4xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="mac-heading-lg text-white">Quem usa, recomenda</h2>
+          <p className="mt-4 text-base leading-relaxed text-zinc-400">
+            Veja como a Unique Gestor está transformando a gestão de empresas em
+            todo o Brasil.
+          </p>
+        </div>
+
+        <blockquote className="mx-auto mt-12 max-w-5xl font-display text-2xl font-bold leading-snug tracking-tight text-white md:text-3xl lg:text-4xl">
           &ldquo;{current.quote}&rdquo;
         </blockquote>
 

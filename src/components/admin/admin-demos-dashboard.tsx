@@ -7,7 +7,7 @@ import {
   DEMO_STATUS_STYLES,
   formatCreatedAt,
   formatScheduledDate,
-  getSolutionLabel,
+  getSolutionsLabel,
 } from "@/lib/admin/demo-labels";
 import type { DemoRequest, DemoRequestStatus } from "@/lib/demo-requests/types";
 import { DEMO_REQUEST_STATUSES } from "@/lib/demo-requests/types";
@@ -216,7 +216,7 @@ export function AdminDemosDashboard({ initialRequests }: AdminDemosDashboardProp
                         <p className="text-xs text-zinc-500">{request.email}</p>
                       </td>
                       <td className="px-4 py-4 text-zinc-300">
-                        {getSolutionLabel(request.solution)}
+                        {getSolutionsLabel(request.solutions, request.solution)}
                       </td>
                       <td className="px-4 py-4">
                         <span

@@ -74,6 +74,7 @@ export async function createDemoRequest(
   const request: DemoRequest = {
     id: randomUUID(),
     ...input,
+    message: input.message ?? "",
     status: "pending",
     notes: "",
     createdAt: now,

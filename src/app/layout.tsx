@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Unique Gestor — Plataforma de Gestão Integrada",
   description:
-    "Gestão Societária, SGC (Contratos) e Unique Escalas em uma única plataforma. Automatize processos, garanta conformidade LGPD e escale sua operação.",
+    "Gestão Societária, Contratos e Escalas Médicas em uma única plataforma. Controle total, workflow inteligente e conformidade com a LGPD. Teste grátis por 14 dias.",
   keywords: [
     "gestão societária",
     "gestão de contratos",

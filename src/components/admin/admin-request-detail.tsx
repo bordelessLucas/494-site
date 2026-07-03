@@ -5,7 +5,7 @@ import {
   DEMO_STATUS_LABELS,
   formatCreatedAt,
   formatScheduledDate,
-  getSolutionLabel,
+  getSolutionsLabel,
 } from "@/lib/admin/demo-labels";
 import type { DemoRequest, DemoRequestStatus } from "@/lib/demo-requests/types";
 import { DEMO_REQUEST_STATUSES } from "@/lib/demo-requests/types";
@@ -138,7 +138,13 @@ export function AdminRequestDetail({
               <DetailSection title="Contato">
                 <DetailRow label="E-mail" value={request.email} />
                 <DetailRow label="Telefone" value={request.phone} />
-                <DetailRow label="Solução" value={getSolutionLabel(request.solution)} />
+                {request.company && <DetailRow label="Empresa" value={request.company} />}
+                {request.role && <DetailRow label="Cargo" value={request.role} />}
+                <DetailRow
+                  label="Soluções"
+                  value={getSolutionsLabel(request.solutions, request.solution)}
+                />
+                {request.message && <DetailRow label="Mensagem" value={request.message} />}
                 <DetailRow label="Recebida em" value={formatCreatedAt(request.createdAt)} />
               </DetailSection>
 

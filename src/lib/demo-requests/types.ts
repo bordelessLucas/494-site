@@ -1,5 +1,3 @@
-import type { DemoSolutionId } from "@/lib/demo-data";
-
 export const DEMO_REQUEST_STATUSES = [
   "pending",
   "confirmed",
@@ -11,10 +9,15 @@ export type DemoRequestStatus = (typeof DEMO_REQUEST_STATUSES)[number];
 
 export type DemoRequest = {
   id: string;
-  solution: DemoSolutionId | string;
+  solutions: string[];
+  solution?: string;
   name: string;
   email: string;
   phone: string;
+  company?: string;
+  role?: string;
+  companySize?: string;
+  message?: string;
   scheduledDate: string;
   scheduledTime: string;
   status: DemoRequestStatus;
@@ -24,10 +27,14 @@ export type DemoRequest = {
 };
 
 export type CreateDemoRequestInput = {
-  solution: string;
+  solutions: string[];
   name: string;
   email: string;
   phone: string;
+  company: string;
+  role: string;
+  companySize: string;
+  message?: string;
   scheduledDate: string;
   scheduledTime: string;
 };

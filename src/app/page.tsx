@@ -1,12 +1,16 @@
+import { MacContact } from "@/components/mac/mac-contact";
 import { MacCta } from "@/components/mac/mac-cta";
 import { MacFaq } from "@/components/mac/mac-faq";
+import { MacFeatures } from "@/components/mac/mac-features";
 import { MacFooter } from "@/components/mac/mac-footer";
 import { MacHero } from "@/components/mac/mac-hero";
-import { MacIntro } from "@/components/mac/mac-intro";
 import { MacNavbar } from "@/components/mac/mac-navbar";
-import { MacPortfolio } from "@/components/mac/mac-portfolio";
+import { MacPlatform } from "@/components/mac/mac-platform";
+import { MacPricing } from "@/components/mac/mac-pricing";
 import { MacServices } from "@/components/mac/mac-services";
+import { MacStats } from "@/components/mac/mac-stats";
 import { MacTestimonial } from "@/components/mac/mac-testimonial";
+import { MacWhatsApp } from "@/components/mac/mac-whatsapp";
 
 export default function HomePage() {
   return (
@@ -20,14 +24,18 @@ export default function HomePage() {
         <MacNavbar />
         <main id="main-content">
           <MacHero />
-          <MacIntro />
-          <MacPortfolio />
-          <MacTestimonial />
-          <MacFaq />
           <MacServices />
+          <MacFeatures />
+          <MacPlatform />
+          <MacStats />
+          <MacTestimonial />
+          <MacPricing />
+          <MacFaq />
+          <MacContact />
           <MacCta />
         </main>
         <MacFooter />
+        <MacWhatsApp />
       </div>
     </div>
   );

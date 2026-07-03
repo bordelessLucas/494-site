@@ -19,6 +19,14 @@ export function getSolutionLabel(solutionId: string): string {
   return DEMO_SOLUTIONS.find((solution) => solution.id === solutionId)?.label ?? solutionId;
 }
 
+export function getSolutionsLabel(solutions: string[] | undefined, legacySolution?: string): string {
+  if (solutions?.length) {
+    return solutions.map(getSolutionLabel).join(", ");
+  }
+  if (legacySolution) return getSolutionLabel(legacySolution);
+  return "—";
+}
+
 export function formatScheduledDate(date: string, time: string): string {
   const [year, month, day] = date.split("-").map(Number);
   const scheduled = new Date(year, month - 1, day, ...time.split(":").map(Number));

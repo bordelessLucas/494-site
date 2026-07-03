@@ -49,15 +49,62 @@ const phoneFieldSchema = z
   });
 
 export const demoFormSchema = z.object({
-  solution: z.string().min(1, "Selecione uma solução"),
+  solutions: z.array(z.string()).min(1, "Selecione ao menos uma solução"),
   name: z.string().min(2, "Informe seu nome completo"),
-  email: z.string().email("Informe um e-mail válido"),
+  email: z
+    .string()
+    .email("Por favor, insira um e-mail válido")
+    .refine(
+      (email) => !/@(gmail|hotmail|outlook|yahoo|live)\./i.test(email),
+      "Use um e-mail corporativo",
+    ),
   phone: phoneFieldSchema,
+  company: z.string().min(2, "Informe o nome da empresa"),
+  role: z.string().min(2, "Informe seu cargo"),
+  companySize: z.string().min(1, "Selecione o porte da empresa"),
+  message: z.string().optional(),
   scheduledDate: z.string().min(1, "Selecione uma data"),
   scheduledTime: z.string().min(1, "Selecione um horário"),
 });
 
 export type DemoFormInput = z.infer<typeof demoFormSchema>;
+
+export function validateDemoStep1(
+  data: Pick<DemoFormInput, "name" | "email" | "phone" | "company" | "role" | "companySize">,
+) {
+  const errors: Record<string, string> = {};
+
+  const nameResult = demoFormSchema.shape.name.safeParse(data.name.trim());
+  if (!nameResult.success) errors.name = "Este campo é obrigatório.";
+
+  const emailResult = demoFormSchema.shape.email.safeParse(data.email.trim());
+  if (!emailResult.success)
+    errors.email = emailResult.error.errors[0]?.message ?? "Por favor, insira um e-mail válido.";
+
+  const phoneResult = phoneFieldSchema.safeParse(data.phone.trim());
+  if (!phoneResult.success)
+    errors.phone = phoneResult.error.errors[0]?.message ?? "Formato esperado: (11) 99999-9999";
+
+  const companyResult = demoFormSchema.shape.company.safeParse(data.company.trim());
+  if (!companyResult.success) errors.company = "Este campo é obrigatório.";
+
+  const roleResult = demoFormSchema.shape.role.safeParse(data.role.trim());
+  if (!roleResult.success) errors.role = "Este campo é obrigatório.";
+
+  const sizeResult = demoFormSchema.shape.companySize.safeParse(data.companySize);
+  if (!sizeResult.success) errors.companySize = "Selecione o porte da empresa";
+
+  return errors;
+}
+
+export function validateDemoStep2(
+  data: Pick<DemoFormInput, "solutions">,
+) {
+  const errors: Record<string, string> = {};
+  const solutionsResult = demoFormSchema.shape.solutions.safeParse(data.solutions);
+  if (!solutionsResult.success) errors.solutions = "Selecione ao menos uma solução";
+  return errors;
+}
 
 export const demoRequestStatusSchema = z.enum([
   "pending",
@@ -76,28 +123,6 @@ export type UpdateDemoRequestInput = z.infer<typeof updateDemoRequestSchema>;
 export const adminLoginSchema = z.object({
   password: z.string().min(1, "Informe a senha"),
 });
-
-export function validateDemoStep1(
-  data: Pick<DemoFormInput, "solution" | "name" | "email" | "phone">,
-) {
-  const errors: Record<string, string> = {};
-
-  const solutionResult = demoFormSchema.shape.solution.safeParse(data.solution);
-  if (!solutionResult.success) errors.solution = "Selecione uma solução";
-
-  const nameResult = demoFormSchema.shape.name.safeParse(data.name.trim());
-  if (!nameResult.success) errors.name = "Informe seu nome completo";
-
-  const emailResult = demoFormSchema.shape.email.safeParse(data.email.trim());
-  if (!emailResult.success)
-    errors.email = emailResult.error.errors[0]?.message ?? "E-mail inválido";
-
-  const phoneResult = phoneFieldSchema.safeParse(data.phone.trim());
-  if (!phoneResult.success)
-    errors.phone = phoneResult.error.errors[0]?.message ?? "Telefone inválido";
-
-  return errors;
-}
 
 export function validateStep1(data: Pick<ContactFormInput, "name" | "email" | "phone">) {
   const errors: Record<string, string> = {};
