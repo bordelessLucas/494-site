@@ -9,10 +9,18 @@ import {
   formatScheduledDate,
   getSolutionsLabel,
 } from "@/lib/admin/demo-labels";
+import {
+  DEMO_PERIOD_LABELS,
+  DEMO_PERIODS,
+  computeDemoMetrics,
+  filterByPeriod,
+  type DemoPeriod,
+} from "@/lib/admin/demo-metrics";
+import { buildCsvFilename, demoRequestsToCsv, downloadCsv } from "@/lib/admin/csv";
 import type { DemoRequest, DemoRequestStatus } from "@/lib/demo-requests/types";
 import { DEMO_REQUEST_STATUSES } from "@/lib/demo-requests/types";
 import { cn } from "@/lib/utils";
-import { LogOut, RefreshCw, Search } from "lucide-react";
+import { Download, LogOut, RefreshCw, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -27,14 +35,20 @@ export function AdminDemosDashboard({ initialRequests }: AdminDemosDashboardProp
   const router = useRouter();
   const [requests, setRequests] = useState(initialRequests);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [period, setPeriod] = useState<DemoPeriod>("all");
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const periodRequests = useMemo(
+    () => filterByPeriod(requests, period),
+    [requests, period],
+  );
+
   const filteredRequests = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    return requests.filter((request) => {
+    return periodRequests.filter((request) => {
       const matchesStatus =
         statusFilter === "all" || request.status === statusFilter;
       const matchesSearch =
@@ -45,22 +59,18 @@ export function AdminDemosDashboard({ initialRequests }: AdminDemosDashboardProp
 
       return matchesStatus && matchesSearch;
     });
-  }, [requests, search, statusFilter]);
+  }, [periodRequests, search, statusFilter]);
 
-  const stats = useMemo(() => {
-    return {
-      total: requests.length,
-      pending: requests.filter((request) => request.status === "pending").length,
-      confirmed: requests.filter((request) => request.status === "confirmed").length,
-      upcoming: requests.filter((request) => {
-        const isActive =
-          request.status === "pending" || request.status === "confirmed";
-        if (!isActive) return false;
-        const scheduled = new Date(`${request.scheduledDate}T${request.scheduledTime}`);
-        return scheduled >= new Date();
-      }).length,
-    };
-  }, [requests]);
+  const metrics = useMemo(
+    () => computeDemoMetrics(periodRequests),
+    [periodRequests],
+  );
+
+  const handleExportCsv = () => {
+    if (filteredRequests.length === 0) return;
+    const csv = demoRequestsToCsv(filteredRequests);
+    downloadCsv(csv, buildCsvFilename());
+  };
 
   const selectedRequest =
     filteredRequests.find((request) => request.id === selectedId) ??
@@ -117,6 +127,17 @@ export function AdminDemosDashboard({ initialRequests }: AdminDemosDashboardProp
               type="button"
               variant="ghost"
               className="gap-2"
+              onClick={handleExportCsv}
+              disabled={filteredRequests.length === 0}
+              title="Exportar solicitações filtradas em CSV"
+            >
+              <Download className="h-4 w-4" />
+              Exportar CSV
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="gap-2"
               onClick={refreshRequests}
               disabled={isRefreshing}
             >
@@ -132,21 +153,73 @@ export function AdminDemosDashboard({ initialRequests }: AdminDemosDashboardProp
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
-        <div className="mb-8">
-          <h1 className="font-display text-3xl font-bold text-white">
-            Solicitações de demonstração
-          </h1>
-          <p className="mt-2 text-sm text-zinc-400">
-            Gerencie agendamentos, confirme demos e acompanhe o status de cada lead.
-          </p>
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="font-display text-3xl font-bold text-white">
+              Solicitações de demonstração
+            </h1>
+            <p className="mt-2 text-sm text-zinc-400">
+              Gerencie agendamentos, confirme demos e acompanhe o status de cada lead.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {DEMO_PERIODS.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setPeriod(option)}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
+                  period === option
+                    ? "bg-white text-[#050508]"
+                    : "bg-white/[0.04] text-zinc-400 ring-1 ring-white/[0.08] hover:text-white",
+                )}
+              >
+                {DEMO_PERIOD_LABELS[option]}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Total" value={stats.total} />
-          <StatCard label="Pendentes" value={stats.pending} accent="text-amber-300" />
-          <StatCard label="Confirmadas" value={stats.confirmed} accent="text-emerald-300" />
-          <StatCard label="Próximas" value={stats.upcoming} accent="text-[#4d7cff]" />
+          <StatCard label="Total no período" value={metrics.total} />
+          <StatCard
+            label="Pendentes"
+            value={metrics.byStatus.pending}
+            accent="text-amber-300"
+          />
+          <StatCard
+            label="Próximas"
+            value={metrics.upcoming}
+            accent="text-[#4d7cff]"
+          />
+          <StatCard
+            label="Taxa de conversão"
+            value={`${metrics.conversionRate}%`}
+            accent="text-emerald-300"
+            hint={`${metrics.byStatus.completed} concluída(s)`}
+          />
         </div>
+
+        {metrics.topSolutions.length > 0 && (
+          <div className="mb-8 rounded-2xl border border-white/[0.08] bg-[#0c0c14] px-5 py-4">
+            <p className="mb-3 text-xs uppercase tracking-wider text-zinc-500">
+              Soluções mais solicitadas
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {metrics.topSolutions.map((solution) => (
+                <span
+                  key={solution.label}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1.5 text-xs text-zinc-300 ring-1 ring-white/[0.08]"
+                >
+                  {solution.label}
+                  <span className="font-semibold text-white">{solution.count}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-wrap gap-2">
@@ -253,15 +326,18 @@ function StatCard({
   label,
   value,
   accent = "text-white",
+  hint,
 }: {
   label: string;
-  value: number;
+  value: number | string;
   accent?: string;
+  hint?: string;
 }) {
   return (
     <div className="rounded-2xl border border-white/[0.08] bg-[#0c0c14] px-5 py-4">
       <p className="text-xs uppercase tracking-wider text-zinc-500">{label}</p>
       <p className={cn("mt-2 font-display text-3xl font-bold", accent)}>{value}</p>
+      {hint && <p className="mt-1 text-xs text-zinc-500">{hint}</p>}
     </div>
   );
 }
