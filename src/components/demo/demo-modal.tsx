@@ -486,7 +486,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                       {selectedSlot && (
                         <div className="space-y-2">
                           <p className="text-sm font-medium text-zinc-300">Horário</p>
-                          <div className="grid grid-cols-3 gap-2">
+                          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                             {selectedSlot.times.map((time) => {
                               const isSelected = selectedTime === time;
                               return (

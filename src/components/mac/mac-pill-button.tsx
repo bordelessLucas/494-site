@@ -26,7 +26,7 @@ export const MacPillButton = forwardRef<HTMLButtonElement, MacPillButtonProps>(
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-200",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 sm:min-h-0 sm:px-6 sm:py-3",
         "outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]/50",
         "disabled:pointer-events-none disabled:opacity-50",
         variants[variant],

@@ -70,7 +70,7 @@ export default function TermosPage() {
   return (
     <div className="mac-page min-h-screen">
       <MacNavbar />
-      <main id="main-content" className="mac-container max-w-3xl pt-28 pb-24">
+      <main id="main-content" className="mac-container max-w-3xl pt-20 pb-16 sm:pt-28 sm:pb-24">
         <h1 className="mac-heading-lg text-white">Termos de Uso</h1>
         <p className="mt-4 text-sm text-zinc-500">Última atualização: julho de 2026</p>
         <p className="mt-6 text-base leading-relaxed text-zinc-400">

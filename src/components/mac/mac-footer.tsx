@@ -12,9 +12,9 @@ export function MacFooter() {
   ];
 
   return (
-    <footer className="border-t border-white/[0.06] pb-12 pt-16 md:pt-20">
+    <footer className="border-t border-white/[0.06] pb-8 pt-12 sm:pb-12 sm:pt-16 md:pt-20">
       <div className="mac-container">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-10">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-5 lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <UniqueLogo />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-zinc-500">
@@ -56,24 +56,24 @@ export function MacFooter() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/[0.06] pt-8 sm:flex-row sm:items-center">
-          <ul className="flex flex-col gap-3 sm:flex-row sm:gap-6">
-            <li className="flex items-center gap-2 text-sm text-zinc-500">
-              <Phone className="h-4 w-4 text-[#4d7cff]" strokeWidth={1.5} />
+        <div className="mt-10 flex flex-col items-start justify-between gap-5 border-t border-white/[0.06] pt-6 sm:mt-12 sm:flex-row sm:items-center sm:gap-6 sm:pt-8">
+          <ul className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-6">
+            <li className="flex items-start gap-2 text-sm text-zinc-500 sm:items-center">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#4d7cff] sm:mt-0" strokeWidth={1.5} />
               {LANDING_FOOTER.contact.phone}
             </li>
-            <li className="flex items-center gap-2 text-sm text-zinc-500">
-              <Mail className="h-4 w-4 text-[#4d7cff]" strokeWidth={1.5} />
-              {LANDING_FOOTER.contact.email}
+            <li className="flex items-start gap-2 text-sm text-zinc-500 sm:items-center">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#4d7cff] sm:mt-0" strokeWidth={1.5} />
+              <span className="break-all sm:break-normal">{LANDING_FOOTER.contact.email}</span>
             </li>
-            <li className="flex items-center gap-2 text-sm text-zinc-500">
-              <MapPin className="h-4 w-4 text-[#4d7cff]" strokeWidth={1.5} />
-              {LANDING_FOOTER.contact.address.join(", ")}
+            <li className="flex items-start gap-2 text-sm text-zinc-500 sm:items-center">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#4d7cff] sm:mt-0" strokeWidth={1.5} />
+              <span>{LANDING_FOOTER.contact.address.join(", ")}</span>
             </li>
           </ul>
         </div>
 
-        <p className="mt-8 text-center text-xs text-zinc-600">
+        <p className="mt-6 text-center text-xs leading-relaxed text-zinc-600 sm:mt-8">
           &copy; {new Date().getFullYear()} Unique Gestor. Todos os direitos
           reservados. CNPJ: {LANDING_FOOTER.cnpj}
         </p>

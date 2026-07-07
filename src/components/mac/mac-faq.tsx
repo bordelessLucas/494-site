@@ -11,7 +11,7 @@ export function MacFaq() {
   return (
     <section id="faq" className="mac-section">
       <div className="mac-container">
-        <div className="mac-card grid grid-cols-1 gap-12 p-8 md:p-12 lg:grid-cols-2 lg:gap-20 lg:p-16">
+        <div className="mac-card grid grid-cols-1 gap-8 p-5 sm:gap-10 sm:p-6 md:p-12 lg:grid-cols-2 lg:gap-20 lg:p-16">
           <div>
             <h2 className="mac-heading-lg text-white">Perguntas Frequentes</h2>
             <p className="mt-4 max-w-md text-base leading-relaxed text-zinc-400">

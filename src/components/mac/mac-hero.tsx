@@ -13,7 +13,7 @@ const CHART_BARS = [
 
 function HeroGraphicCard() {
   return (
-    <div className="mac-card-muted relative min-h-[220px] overflow-hidden rounded-[32px] md:min-h-[240px]">
+    <div className="mac-card-muted relative min-h-[180px] overflow-hidden rounded-2xl sm:min-h-[220px] md:min-h-[240px] md:rounded-[32px]">
       <div className="absolute bottom-0 left-0 h-[85%] w-[85%] rounded-tr-[100%] bg-[#4d7cff]/10" />
       <div className="mac-gradient-bg absolute right-8 top-8 h-24 w-24 rounded-full opacity-20 blur-2xl" />
 
@@ -30,9 +30,9 @@ function HeroGraphicCard() {
 
 function HeroStatCard() {
   return (
-    <div className="mac-card flex min-h-[220px] flex-col justify-between p-6 md:min-h-[240px] md:p-7">
+    <div className="mac-card flex min-h-[180px] flex-col justify-between p-5 sm:min-h-[220px] sm:p-6 md:min-h-[240px] md:p-7">
       <div>
-        <p className="font-display text-5xl font-bold tracking-tight text-white md:text-[3.25rem]">
+        <p className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-[3.25rem]">
           {LANDING_HERO.statValue}
         </p>
         <p className="mt-3 max-w-[200px] text-sm leading-relaxed text-zinc-400">
@@ -48,26 +48,26 @@ function HeroStatCard() {
 
 function HeroChartCard() {
   return (
-    <div className="mac-card-dark relative overflow-hidden p-6 md:p-8">
+    <div className="mac-card-dark relative overflow-hidden p-5 sm:p-6 md:p-8">
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#4d7cff]/10 via-transparent to-[#b456ff]/10"
         aria-hidden
       />
-      <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+      <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
         <div className="max-w-sm">
-          <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+          <p className="text-[10px] font-medium uppercase tracking-wider text-zinc-500 sm:text-xs">
             {LANDING_HERO.chartEyebrow}
           </p>
-          <p className="mt-2 font-display text-xl font-bold leading-snug text-white md:text-2xl">
+          <p className="mt-1.5 font-display text-lg font-bold leading-snug text-white sm:mt-2 sm:text-xl md:text-2xl">
             {LANDING_HERO.chartTitle}
           </p>
         </div>
 
-        <div className="flex items-end justify-center gap-3 sm:justify-end">
+        <div className="flex items-end justify-center gap-2.5 sm:justify-end sm:gap-3">
           {CHART_BARS.map((bar, i) => (
             <div
               key={i}
-              className="w-9 rounded-t-md md:w-10"
+              className="w-7 rounded-t-md sm:w-9 md:w-10"
               style={{ height: `${bar.height}px`, backgroundColor: bar.color }}
               title={["Societária", "SGC", "Escalas"][i]}
             />
@@ -80,30 +80,30 @@ function HeroChartCard() {
 
 export function MacHero() {
   return (
-    <section className="mac-section pt-6 md:pt-10">
+    <section className="mac-section pt-4 sm:pt-6 md:pt-10">
       <div className="mac-container">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
+        <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           <div className="max-w-[540px]">
-            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-zinc-300">
+            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium text-zinc-300 sm:px-4 sm:py-1.5 sm:text-xs">
               {LANDING_HERO.badge}
             </span>
-            <h1 className="mac-heading-xl mt-6 text-white">
+            <h1 className="mac-heading-xl mt-4 text-white sm:mt-6">
               {LANDING_HERO.headline}
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-zinc-400 md:text-[1.05rem]">
+            <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:mt-6 sm:text-base md:text-[1.05rem]">
               {LANDING_HERO.subheadline}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <OpenDemoButton variant="gradient" className="gap-2.5 px-6">
+            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <OpenDemoButton variant="gradient" className="w-full gap-2.5 px-6 sm:w-auto">
                 {LANDING_HERO.ctaPrimary}
                 <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
               </OpenDemoButton>
-              <OpenDemoButton variant="outline" className="px-6">
+              <OpenDemoButton variant="outline" className="w-full px-6 sm:w-auto">
                 {LANDING_HERO.ctaSecondary}
               </OpenDemoButton>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4">
               {LANDING_HERO.trustBadges.map((badge) => (
                 <span
                   key={badge}

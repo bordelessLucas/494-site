@@ -19,12 +19,12 @@ export function MacPricing() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3 md:gap-6">
           {LANDING_PLANS.map((plan) => (
             <article
               key={plan.name}
               className={cn(
-                "mac-card flex flex-col p-8",
+                "mac-card flex flex-col p-5 sm:p-6 md:p-8",
                 plan.popular && "ring-1 ring-[#4d7cff]/40",
               )}
             >

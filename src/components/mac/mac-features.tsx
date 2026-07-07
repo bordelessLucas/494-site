@@ -14,9 +14,9 @@ export function MacFeatures() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {LANDING_FEATURES.map((feature, index) => (
-            <article key={feature.title} className="mac-card p-7">
+            <article key={feature.title} className="mac-card p-5 sm:p-6 md:p-7">
               <span className="font-display text-sm font-bold text-[#4d7cff]">
                 {String(index + 1).padStart(2, "0")}
               </span>

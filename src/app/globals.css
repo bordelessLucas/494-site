@@ -50,7 +50,19 @@
     font-weight: 700;
     letter-spacing: -0.05em;
     line-height: 0.95;
-    font-size: 4.5rem;
+    font-size: 2.25rem;
+  }
+
+  @media (min-width: 640px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 3.75rem;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -87,7 +99,7 @@
 
 @layer utilities {
   .section-spacing {
-    @apply py-[120px];
+    @apply py-16 sm:py-24 md:py-[120px];
   }
 
   .heading-display {
@@ -102,7 +114,19 @@
     font-weight: 700;
     letter-spacing: -0.05em;
     line-height: 0.95;
-    font-size: 4.5rem;
+    font-size: 2.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .heading-hero {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .heading-hero {
+      font-size: 3.75rem;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -558,19 +582,51 @@
   }
 
   .mac-orb-blue {
-    width: 420px;
-    height: 420px;
-    top: 8%;
-    right: 12%;
+    width: 220px;
+    height: 220px;
+    top: 4%;
+    right: -8%;
     background: rgba(77, 124, 255, 0.35);
   }
 
   .mac-orb-purple {
-    width: 360px;
-    height: 360px;
-    bottom: 20%;
-    left: 8%;
+    width: 180px;
+    height: 180px;
+    bottom: 15%;
+    left: -6%;
     background: rgba(180, 86, 255, 0.28);
+  }
+
+  @media (min-width: 768px) {
+    .mac-orb-blue {
+      width: 320px;
+      height: 320px;
+      top: 6%;
+      right: 4%;
+    }
+
+    .mac-orb-purple {
+      width: 280px;
+      height: 280px;
+      bottom: 18%;
+      left: 2%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mac-orb-blue {
+      width: 420px;
+      height: 420px;
+      top: 8%;
+      right: 12%;
+    }
+
+    .mac-orb-purple {
+      width: 360px;
+      height: 360px;
+      bottom: 20%;
+      left: 8%;
+    }
   }
 
   .mac-grain {
@@ -613,23 +669,23 @@
   }
 
   .mac-container {
-    @apply mx-auto w-full max-w-7xl px-5 md:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-5 md:px-8;
   }
 
   .mac-section {
-    @apply py-20 md:py-28;
+    @apply py-14 sm:py-20 md:py-28;
   }
 
   .mac-card {
-    @apply rounded-[32px] border border-white/[0.08] bg-[#12121a]/90;
+    @apply rounded-2xl border border-white/[0.08] bg-[#12121a]/90 sm:rounded-[28px] md:rounded-[32px];
   }
 
   .mac-card-muted {
-    @apply rounded-[32px] border border-white/[0.06] bg-white/[0.03];
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.03] sm:rounded-[28px] md:rounded-[32px];
   }
 
   .mac-card-dark {
-    @apply rounded-[32px] border border-white/[0.08] bg-[#0c0c14] text-white;
+    @apply rounded-2xl border border-white/[0.08] bg-[#0c0c14] text-white sm:rounded-[28px] md:rounded-[32px];
   }
 
   .mac-divider {
@@ -639,13 +695,13 @@
   .mac-heading-xl {
     font-family: var(--font-display);
     @apply font-bold tracking-tight leading-[1.05] select-none;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(1.875rem, 6vw, 4.5rem);
   }
 
   .mac-heading-lg {
     font-family: var(--font-display);
     @apply font-bold tracking-tight leading-[1.1] select-none;
-    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-size: clamp(1.625rem, 4.5vw, 3.25rem);
   }
 
   .mac-quote {
@@ -675,6 +731,14 @@
     50% {
       background-color: rgba(255, 255, 255, 0.1);
     }
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
   }
 }
 

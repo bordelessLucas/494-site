@@ -14,7 +14,7 @@ export function MacServices() {
   return (
     <section id="solucoes" className="mac-section">
       <div className="mac-container">
-        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-16">
           <h2 className="mac-heading-lg max-w-xl text-white">
             {LANDING_SOLUTIONS.heading}
           </h2>
@@ -25,11 +25,11 @@ export function MacServices() {
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3 md:gap-6">
           {LANDING_SOLUTIONS.items.map((item) => (
             <article
               key={item.id}
-              className="mac-card group relative flex flex-col p-8"
+              className="mac-card group relative flex flex-col p-5 sm:p-6 md:p-8"
             >
               <div className="mb-8">
                 <div

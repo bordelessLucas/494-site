@@ -26,7 +26,7 @@ export function MacContact() {
   return (
     <section id="contato" className="mac-section">
       <div className="mac-container">
-        <div className="mac-card grid grid-cols-1 gap-12 p-8 md:p-12 lg:grid-cols-2 lg:gap-16 lg:p-16">
+        <div className="mac-card grid grid-cols-1 gap-8 p-5 sm:gap-10 sm:p-6 md:p-12 lg:grid-cols-2 lg:gap-16 lg:p-16">
           <div>
             <h2 className="mac-heading-lg text-white">
               {LANDING_CONTACT.heading}
@@ -58,7 +58,7 @@ export function MacContact() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="rounded-[28px] border border-white/[0.08] bg-[#0a0a10] p-8 text-center">
+            <div className="rounded-2xl border border-white/[0.08] bg-[#0a0a10] p-5 text-center sm:rounded-[28px] sm:p-8">
               <p className="text-sm text-zinc-400">
                 Preencha o formulário de agendamento e nossa equipe entrará em
                 contato no dia e horário escolhidos.

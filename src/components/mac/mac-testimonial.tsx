@@ -26,11 +26,11 @@ export function MacTestimonial() {
           </p>
         </div>
 
-        <blockquote className="mx-auto mt-12 max-w-5xl font-display text-2xl font-bold leading-snug tracking-tight text-white md:text-3xl lg:text-4xl">
+        <blockquote className="mx-auto mt-8 max-w-5xl font-display text-xl font-bold leading-snug tracking-tight text-white sm:mt-12 sm:text-2xl md:text-3xl lg:text-4xl">
           &ldquo;{current.quote}&rdquo;
         </blockquote>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-end">
+        <div className="mt-10 flex flex-col items-start justify-between gap-6 sm:mt-14 sm:flex-row sm:items-end sm:gap-8">
           <div className="flex items-center gap-4">
             <div className="h-14 w-14 rounded-full bg-white/10 ring-1 ring-white/10" />
             <div>
@@ -41,11 +41,11 @@ export function MacTestimonial() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-start">
             <button
               type="button"
               onClick={goPrev}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 sm:h-12 sm:w-12"
               aria-label="Depoimento anterior"
             >
               <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
@@ -61,7 +61,7 @@ export function MacTestimonial() {
             <button
               type="button"
               onClick={goNext}
-              className="mac-gradient-bg flex h-12 w-12 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90"
+              className="mac-gradient-bg flex h-11 w-11 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90 sm:h-12 sm:w-12"
               aria-label="Próximo depoimento"
             >
               <ArrowRight className="h-4 w-4" strokeWidth={1.75} />

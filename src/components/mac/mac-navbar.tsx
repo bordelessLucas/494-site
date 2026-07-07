@@ -50,7 +50,7 @@ export function MacNavbar() {
         isScrolled && "border-b border-white/[0.06] bg-[#050508]/92",
       )}
     >
-      <div className="mac-container flex h-[72px] items-center justify-between gap-4">
+      <div className="mac-container flex h-14 items-center justify-between gap-3 sm:h-16 md:h-[72px]">
         <Link href="/" aria-label="Unique Gestor — Início">
           <UniqueLogo />
         </Link>
@@ -97,13 +97,20 @@ export function MacNavbar() {
       </div>
 
       {isMobileOpen && (
-        <div className="border-t border-white/[0.06] bg-[#050508]/98 px-6 py-6 lg:hidden">
-          <nav className="flex flex-col gap-4" aria-label="Mobile">
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 top-14 z-30 bg-black/50 lg:hidden sm:top-16 md:top-[72px]"
+            onClick={() => setIsMobileOpen(false)}
+            aria-label="Fechar menu"
+          />
+          <div className="fixed inset-x-0 top-14 z-40 max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-b border-white/[0.06] bg-[#050508]/98 backdrop-blur-xl sm:top-16 md:top-[72px] lg:hidden">
+            <nav className="mac-container flex flex-col gap-1 py-4 pb-6" aria-label="Mobile">
             {LANDING_NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-base text-zinc-300"
+                className="rounded-xl px-3 py-3.5 text-base text-zinc-200 transition-colors active:bg-white/[0.06]"
                 onClick={() => setIsMobileOpen(false)}
               >
                 {link.label}
@@ -111,20 +118,23 @@ export function MacNavbar() {
             ))}
             <Link
               href={LANDING_LOGIN_URL}
-              className="text-base text-zinc-300"
+              className="rounded-xl px-3 py-3.5 text-base text-zinc-200 transition-colors active:bg-white/[0.06]"
               onClick={() => setIsMobileOpen(false)}
             >
               Acessar Plataforma
             </Link>
-            <OpenDemoButton
-              variant="gradient"
-              className="mt-2 w-full"
-              onClick={() => setIsMobileOpen(false)}
-            >
-              Solicitar Demonstração
-            </OpenDemoButton>
+            <div className="mt-4 border-t border-white/[0.06] pt-6">
+              <OpenDemoButton
+                variant="gradient"
+                className="w-full"
+                onClick={() => setIsMobileOpen(false)}
+              >
+                Solicitar Demonstração
+              </OpenDemoButton>
+            </div>
           </nav>
         </div>
+        </>
       )}
     </header>
   );

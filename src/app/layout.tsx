@@ -1,6 +1,6 @@
 import { DemoModalProvider } from "@/components/demo/demo-modal-provider";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -37,6 +37,14 @@ export const metadata: Metadata = {
     siteName: "Unique Gestor",
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#050508",
 };
 
 export default function RootLayout({
