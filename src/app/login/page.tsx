@@ -5,8 +5,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Entrar — Unique Gestor",
+  title: "Entrar",
   description: "Acesse a plataforma Unique Gestor.",
+  robots: { index: false, follow: false },
 };
 
 export default function LoginPage() {

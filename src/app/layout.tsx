@@ -1,5 +1,15 @@
 import { DemoModalProvider } from "@/components/demo/demo-modal-provider";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
+import {
+  OrganizationJsonLd,
+  WebsiteJsonLd,
+} from "@/components/seo/json-ld";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_OG_IMAGE,
+  SITE_URL,
+} from "@/lib/site";
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
@@ -17,9 +27,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Unique Gestor — Plataforma de Gestão Integrada",
-  description:
-    "Gestão Societária, Contratos e Escalas Médicas em uma única plataforma. Controle total, workflow inteligente e conformidade com a LGPD. Teste grátis por 14 dias.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Plataforma de Gestão Integrada`,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
   keywords: [
     "gestão societária",
     "gestão de contratos",
@@ -27,16 +40,50 @@ export const metadata: Metadata = {
     "SGC",
     "LGPD",
     "SaaS",
+    "Unique Gestor",
+    "software de gestão",
   ],
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Unique Gestor — Plataforma de Gestão Integrada",
+    title: `${SITE_NAME} — Plataforma de Gestão Integrada`,
     description:
       "Três sistemas poderosos em uma única plataforma para simplificar sua operação.",
     type: "website",
     locale: "pt_BR",
-    siteName: "Unique Gestor",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    images: [
+      {
+        url: SITE_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — dashboard da plataforma`,
+      },
+    ],
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — Plataforma de Gestão Integrada`,
+    description:
+      "Gestão Societária, Contratos e Escalas Médicas em uma única plataforma.",
+    images: [SITE_OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -55,6 +102,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans">
+        <OrganizationJsonLd />
+        <WebsiteJsonLd />
         <SmoothScrollProvider>
           <DemoModalProvider>
             <a

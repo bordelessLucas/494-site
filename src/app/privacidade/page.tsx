@@ -3,9 +3,13 @@ import { MacFooter } from "@/components/mac/mac-footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade — Unique Gestor",
+  title: "Política de Privacidade",
   description:
     "Saiba como a Unique Gestor coleta, utiliza e protege seus dados pessoais em conformidade com a LGPD.",
+  alternates: {
+    canonical: "/privacidade",
+  },
+  robots: { index: true, follow: true },
 };
 
 const SECTIONS = [

@@ -109,14 +109,14 @@ export function AdminRequestDetail({
             exit={{ x: "100%" }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-start justify-between gap-4 border-b border-white/[0.06] px-6 py-5">
-              <div>
+            <div className="flex items-start justify-between gap-3 border-b border-white/[0.06] px-4 py-4 sm:gap-4 sm:px-6 sm:py-5">
+              <div className="min-w-0">
                 <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
                   Solicitação
                 </p>
                 <h2
                   id="admin-request-title"
-                  className="mt-1 font-display text-xl font-bold text-white"
+                  className="mt-1 truncate font-display text-lg font-bold text-white sm:text-xl"
                 >
                   {request.name}
                 </h2>
@@ -127,14 +127,14 @@ export function AdminRequestDetail({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-colors hover:bg-white/10 hover:text-white sm:h-9 sm:w-9"
                 aria-label="Fechar"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="flex-1 space-y-6 overflow-y-auto px-6 py-6">
+            <div className="flex-1 space-y-6 overflow-y-auto overscroll-contain px-4 py-5 sm:px-6 sm:py-6">
               <DetailSection title="Contato">
                 <DetailRow label="E-mail" value={request.email} />
                 <DetailRow label="Telefone" value={request.phone} />

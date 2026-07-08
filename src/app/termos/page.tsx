@@ -3,9 +3,13 @@ import { MacNavbar } from "@/components/mac/mac-navbar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso — Unique Gestor",
+  title: "Termos de Uso",
   description:
     "Termos e condições de uso da plataforma Unique Gestor. Leia antes de utilizar nossos serviços.",
+  alternates: {
+    canonical: "/termos",
+  },
+  robots: { index: true, follow: true },
 };
 
 const SECTIONS = [

@@ -245,20 +245,20 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="demo-modal-title"
-            className="relative z-10 flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-t-[28px] border border-white/[0.08] bg-[#0c0c14] shadow-[0_24px_80px_-12px_rgba(0,0,0,0.8)] sm:rounded-[28px]"
+            className="safe-bottom relative z-10 flex max-h-[min(92dvh,920px)] w-full max-w-lg flex-col overflow-hidden rounded-t-[28px] border border-white/[0.08] bg-[#0c0c14] shadow-[0_24px_80px_-12px_rgba(0,0,0,0.8)] sm:rounded-[28px]"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-start justify-between gap-4 border-b border-white/[0.06] px-6 py-5">
-              <div>
+            <div className="flex items-start justify-between gap-3 border-b border-white/[0.06] px-4 py-4 sm:gap-4 sm:px-6 sm:py-5">
+              <div className="min-w-0">
                 <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
                   {stepLabel}
                 </p>
                 <h2
                   id="demo-modal-title"
-                  className="mt-1 font-display text-xl font-bold text-white"
+                  className="mt-1 font-display text-lg font-bold text-white sm:text-xl"
                 >
                   {step === "personal" && "Seus dados"}
                   {step === "solutions" && "Soluções de interesse"}
@@ -279,14 +279,14 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
               <button
                 type="button"
                 onClick={onClose}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-colors hover:bg-white/10 hover:text-white sm:h-9 sm:w-9"
                 aria-label="Fechar"
               >
                 <X className="h-4 w-4" strokeWidth={1.75} />
               </button>
             </div>
 
-            <div className="overflow-y-auto px-6 py-5">
+            <div className="overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
               {step === "personal" && (
                 <form onSubmit={handlePersonalSubmit} className="space-y-4">
                   {(

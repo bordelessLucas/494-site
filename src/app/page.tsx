@@ -11,10 +11,23 @@ import { MacServices } from "@/components/mac/mac-services";
 import { MacStats } from "@/components/mac/mac-stats";
 import { MacTestimonial } from "@/components/mac/mac-testimonial";
 import { MacWhatsApp } from "@/components/mac/mac-whatsapp";
+import {
+  FaqJsonLd,
+  SoftwareApplicationJsonLd,
+} from "@/components/seo/json-ld";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (
     <div className="mac-page min-h-screen overflow-x-hidden">
+      <FaqJsonLd />
+      <SoftwareApplicationJsonLd />
       <div className="mac-page-ambient" aria-hidden>
         <div className="mac-orb mac-orb-blue" />
         <div className="mac-orb mac-orb-purple" />
