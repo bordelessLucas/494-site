@@ -8,13 +8,7 @@ function normalizePhone(phone: string) {
 
 export const contactFormSchema = z.object({
   name: z.string().min(2, "Informe seu nome completo"),
-  email: z
-    .string()
-    .email("Informe um e-mail válido")
-    .refine(
-      (email) => !/@(gmail|hotmail|outlook|yahoo|live)\./i.test(email),
-      "Use um e-mail corporativo",
-    ),
+  email: z.string().email("Informe um e-mail válido"),
   phone: z
     .string()
     .min(10, "Informe um telefone válido")
@@ -51,13 +45,7 @@ const phoneFieldSchema = z
 export const demoFormSchema = z.object({
   solutions: z.array(z.string()).min(1, "Selecione ao menos uma solução"),
   name: z.string().min(2, "Informe seu nome completo"),
-  email: z
-    .string()
-    .email("Por favor, insira um e-mail válido")
-    .refine(
-      (email) => !/@(gmail|hotmail|outlook|yahoo|live)\./i.test(email),
-      "Use um e-mail corporativo",
-    ),
+  email: z.string().email("Por favor, insira um e-mail válido"),
   phone: phoneFieldSchema,
   company: z.string().min(2, "Informe o nome da empresa"),
   role: z.string().min(2, "Informe seu cargo"),

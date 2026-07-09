@@ -4,6 +4,7 @@ import {
   isSlotBooked,
 } from "@/lib/demo-requests/store";
 import { getAvailableDemoSlots } from "@/lib/demo-data";
+import { sendDemoBookingEmails } from "@/lib/mail/demo-emails";
 import { demoFormSchema } from "@/lib/validation";
 import { NextResponse } from "next/server";
 
@@ -50,12 +51,20 @@ export async function POST(request: Request) {
     }
 
     const demoRequest = await createDemoRequest(parsed.data);
+    const mailResult = await sendDemoBookingEmails(demoRequest);
 
     if (process.env.NODE_ENV === "development") {
       console.info("[demo] Nova demonstração agendada:", demoRequest);
+      if (mailResult.sent) {
+        console.info("[demo] E-mails de confirmação enviados.");
+      }
     }
 
-    return NextResponse.json({ success: true, id: demoRequest.id });
+    return NextResponse.json({
+      success: true,
+      id: demoRequest.id,
+      emailSent: mailResult.sent,
+    });
   } catch {
     return NextResponse.json(
       { error: "Erro ao processar solicitação" },

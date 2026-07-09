@@ -64,6 +64,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
     Array<{ date: string; dayLabel: string; weekday: string; times: string[] }>
   >([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const selectedSlot = slots.find((slot) => slot.date === selectedDate);
 
@@ -79,6 +80,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
     setIsSubmitting(false);
     setSlots([]);
     setIsLoadingSlots(false);
+    setEmailSent(false);
   }, [isOpen]);
 
   useEffect(() => {
@@ -204,6 +206,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
         return;
       }
 
+      setEmailSent(Boolean(data.emailSent));
       setStep("success");
     } catch {
       setSubmitError(
@@ -292,7 +295,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                   {(
                     [
                       { id: "demo-name", field: "name" as const, label: "Nome completo", placeholder: "Seu nome completo", type: "text" },
-                      { id: "demo-email", field: "email" as const, label: "E-mail corporativo", placeholder: "seu@empresa.com.br", type: "email" },
+                      { id: "demo-email", field: "email" as const, label: "E-mail", placeholder: "seu@email.com", type: "email" },
                       { id: "demo-phone", field: "phone" as const, label: "Telefone / WhatsApp", placeholder: "(11) 99999-9999", type: "tel" },
                       { id: "demo-company", field: "company" as const, label: "Empresa", placeholder: "Nome da sua empresa", type: "text" },
                       { id: "demo-role", field: "role" as const, label: "Cargo", placeholder: "Seu cargo na empresa", type: "text" },
@@ -572,8 +575,10 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
 
                   <div>
                     <p className="text-base text-zinc-300">
-                      Nossa equipe entrará em contato no dia e horário escolhidos.
-                      Enquanto isso, fique à vontade para explorar nosso site.
+                      {emailSent
+                        ? "Enviamos um e-mail de confirmação com os detalhes e um convite de calendário (.ics) para adicionar ao Google Calendar ou Outlook."
+                        : "Nossa equipe entrará em contato no dia e horário escolhidos."}
+                      {" "}Enquanto isso, fique à vontade para explorar nosso site.
                     </p>
                     <p className="mt-4 font-display text-2xl font-bold text-white">
                       {selectedSlot.weekday}, {selectedSlot.dayLabel}

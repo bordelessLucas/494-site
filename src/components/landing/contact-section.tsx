@@ -254,7 +254,7 @@ export function ContactSection() {
                       </div>
                       <div>
                         <label htmlFor="email" className="text-sm text-gray-400 mb-1.5 block">
-                          E-mail corporativo *
+                          E-mail *
                         </label>
                         <input
                           id="email"
