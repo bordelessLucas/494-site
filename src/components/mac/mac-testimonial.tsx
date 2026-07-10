@@ -2,6 +2,7 @@
 
 import { LANDING_TESTIMONIALS } from "@/lib/landing-data";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 
 export function MacTestimonial() {
@@ -32,7 +33,16 @@ export function MacTestimonial() {
 
         <div className="mt-10 flex flex-col items-start justify-between gap-6 sm:mt-14 sm:flex-row sm:items-end sm:gap-8">
           <div className="flex items-center gap-4">
-            <div className="h-14 w-14 rounded-full bg-white/10 ring-1 ring-white/10" />
+            <div className="relative h-14 w-14 overflow-hidden rounded-full ring-1 ring-white/15">
+              <Image
+                key={current.avatar}
+                src={current.avatar}
+                alt={`Foto de ${current.name}`}
+                fill
+                sizes="56px"
+                className="object-cover"
+              />
+            </div>
             <div>
               <p className="font-display text-lg font-bold text-white">
                 {current.name}

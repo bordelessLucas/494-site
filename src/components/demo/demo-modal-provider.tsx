@@ -10,10 +10,15 @@ import {
   type ReactNode,
 } from "react";
 import { DemoModal } from "@/components/demo/demo-modal";
+import type { DemoSolutionId } from "@/lib/demo-data";
+
+type OpenDemoModalOptions = {
+  solutions?: DemoSolutionId[];
+};
 
 type DemoModalContextValue = {
   isOpen: boolean;
-  openDemoModal: () => void;
+  openDemoModal: (options?: OpenDemoModalOptions) => void;
   closeDemoModal: () => void;
 };
 
@@ -21,9 +26,19 @@ const DemoModalContext = createContext<DemoModalContextValue | null>(null);
 
 export function DemoModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [initialSolutions, setInitialSolutions] = useState<DemoSolutionId[]>(
+    [],
+  );
 
-  const openDemoModal = useCallback(() => setIsOpen(true), []);
-  const closeDemoModal = useCallback(() => setIsOpen(false), []);
+  const openDemoModal = useCallback((options?: OpenDemoModalOptions) => {
+    setInitialSolutions(options?.solutions ?? []);
+    setIsOpen(true);
+  }, []);
+
+  const closeDemoModal = useCallback(() => {
+    setIsOpen(false);
+    setInitialSolutions([]);
+  }, []);
 
   const value = useMemo(
     () => ({ isOpen, openDemoModal, closeDemoModal }),
@@ -49,7 +64,11 @@ export function DemoModalProvider({ children }: { children: ReactNode }) {
   return (
     <DemoModalContext.Provider value={value}>
       {children}
-      <DemoModal isOpen={isOpen} onClose={closeDemoModal} />
+      <DemoModal
+        isOpen={isOpen}
+        onClose={closeDemoModal}
+        initialSolutions={initialSolutions}
+      />
     </DemoModalContext.Provider>
   );
 }

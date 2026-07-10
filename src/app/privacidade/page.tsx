@@ -99,6 +99,10 @@ export default function PrivacidadePage() {
           >
             privacidade@uniquegestor.com.br
           </a>
+          {" · "}
+          <a href="tel:+5511999999999" className="text-[#4d7cff] hover:underline">
+            (11) 99999-9999
+          </a>
         </p>
       </main>
       <MacFooter />

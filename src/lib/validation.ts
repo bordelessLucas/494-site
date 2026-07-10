@@ -13,7 +13,7 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, "Informe um telefone válido")
     .refine((phone) => phoneRegex.test(normalizePhone(phone)), {
-      message: "Formato: (11) 9 0000-0000",
+      message: "Formato esperado: (11) 99999-9999",
     }),
   company: z.string().optional(),
   role: z.string().optional(),
@@ -39,7 +39,7 @@ const phoneFieldSchema = z
   .string()
   .min(10, "Informe um telefone válido")
   .refine((phone) => phoneRegex.test(normalizePhone(phone)), {
-    message: "Formato: (11) 9 0000-0000",
+    message: "Formato esperado: (11) 99999-9999",
   });
 
 export const demoFormSchema = z.object({

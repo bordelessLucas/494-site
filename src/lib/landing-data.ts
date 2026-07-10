@@ -118,18 +118,24 @@ export const LANDING_TESTIMONIALS = [
       "A Unique Gestor revolucionou nossa gestão de contratos. Antes perdíamos horas procurando documentos e calculando retenções. Hoje tudo está a um clique de distância.",
     name: "Maria Fernanda Costa",
     role: "Gerente Administrativa — Hospital São Lucas",
+    avatar:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=112&h=112&q=80",
   },
   {
     quote:
       "O controle de certidões negativas com alertas automáticos nos salvou de multas e bloqueios. O sistema paga o investimento no primeiro mês.",
     name: "Ricardo Almeida",
     role: "Diretor Financeiro — Grupo Engenharia ABC",
+    avatar:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=112&h=112&q=80",
   },
   {
     quote:
       "O módulo de escalas médicas eliminou os conflitos de horário e reduziu as trocas de última hora em 80%. Nossa equipe finalmente tem previsibilidade.",
     name: "Dra. Patrícia Mendes",
     role: "Coordenadora Médica — Clínica Vida Nova",
+    avatar:
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=112&h=112&q=80",
   },
 ] as const;
 

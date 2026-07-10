@@ -1,4 +1,5 @@
 import { OpenDemoButton } from "@/components/demo/open-demo-button";
+import { MacBackToTop } from "@/components/mac/mac-back-to-top";
 import { MacFooter } from "@/components/mac/mac-footer";
 import { MacNavbar } from "@/components/mac/mac-navbar";
 import { MacPillButton } from "@/components/mac/mac-pill-button";
@@ -53,7 +54,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
                     </OpenDemoButton>
                     <Link href="#funcionalidades" className="w-full sm:w-auto">
                       <MacPillButton variant="outline" className="w-full px-6 sm:w-auto">
-                        Ver Funcionalidades
+                        {details.ctaSecondary}
                       </MacPillButton>
                     </Link>
                   </div>
@@ -175,6 +176,7 @@ export function SolutionPage({ solution }: { solution: Solution }) {
           </section>
         </main>
         <MacFooter />
+        <MacBackToTop />
         <MacWhatsApp />
       </div>
     </div>

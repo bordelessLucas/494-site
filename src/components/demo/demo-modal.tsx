@@ -34,6 +34,7 @@ type DemoFormData = {
 type DemoModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  initialSolutions?: string[];
 };
 
 type ModalStep = "personal" | "solutions" | "calendar" | "success";
@@ -52,7 +53,11 @@ const initialFormData: DemoFormData = {
 const inputClass =
   "w-full rounded-xl bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-zinc-600 outline-none ring-1 ring-white/[0.08] transition-shadow focus:ring-[#4d7cff]/40";
 
-export function DemoModal({ isOpen, onClose }: DemoModalProps) {
+export function DemoModal({
+  isOpen,
+  onClose,
+  initialSolutions = [],
+}: DemoModalProps) {
   const [step, setStep] = useState<ModalStep>("personal");
   const [formData, setFormData] = useState<DemoFormData>(initialFormData);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -72,7 +77,10 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
     if (!isOpen) return;
 
     setStep("personal");
-    setFormData(initialFormData);
+    setFormData({
+      ...initialFormData,
+      solutions: initialSolutions,
+    });
     setErrors({});
     setSelectedDate("");
     setSelectedTime("");
@@ -81,7 +89,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
     setSlots([]);
     setIsLoadingSlots(false);
     setEmailSent(false);
-  }, [isOpen]);
+  }, [isOpen, initialSolutions]);
 
   useEffect(() => {
     if (!isOpen || step !== "calendar") return;
@@ -295,7 +303,7 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                   {(
                     [
                       { id: "demo-name", field: "name" as const, label: "Nome completo", placeholder: "Seu nome completo", type: "text" },
-                      { id: "demo-email", field: "email" as const, label: "E-mail", placeholder: "seu@email.com", type: "email" },
+                      { id: "demo-email", field: "email" as const, label: "E-mail corporativo", placeholder: "seu@empresa.com.br", type: "email" },
                       { id: "demo-phone", field: "phone" as const, label: "Telefone / WhatsApp", placeholder: "(11) 99999-9999", type: "tel" },
                       { id: "demo-company", field: "company" as const, label: "Empresa", placeholder: "Nome da sua empresa", type: "text" },
                       { id: "demo-role", field: "role" as const, label: "Cargo", placeholder: "Seu cargo na empresa", type: "text" },
@@ -343,6 +351,11 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                         </option>
                       ))}
                     </select>
+                    <p className="text-xs leading-relaxed text-zinc-600">
+                      Classifique conforme o faturamento anual: MEI (até R$ 81 mil),
+                      Micro (até R$ 360 mil), Pequena (até R$ 4,8 mi), Média (até R$
+                      300 mi), Grande (acima).
+                    </p>
                     {errors.companySize && (
                       <p className="text-xs text-red-400">{errors.companySize}</p>
                     )}
@@ -361,6 +374,10 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
 
               {step === "solutions" && (
                 <form onSubmit={handleSolutionsSubmit} className="space-y-5">
+                  <p className="text-xs leading-relaxed text-zinc-600">
+                    Selecione uma ou mais soluções para que possamos personalizar a
+                    demonstração.
+                  </p>
                   <div className="grid gap-2">
                     {DEMO_SOLUTIONS.map((solution) => {
                       const isSelected = formData.solutions.includes(solution.id);
@@ -489,6 +506,9 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
                       {selectedSlot && (
                         <div className="space-y-2">
                           <p className="text-sm font-medium text-zinc-300">Horário</p>
+                          <p className="text-xs leading-relaxed text-zinc-600">
+                            Horários disponíveis no fuso de Brasília (GMT-3).
+                          </p>
                           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                             {selectedSlot.times.map((time) => {
                               const isSelected = selectedTime === time;

@@ -1,3 +1,4 @@
+import { MacBackToTop } from "@/components/mac/mac-back-to-top";
 import { MacContact } from "@/components/mac/mac-contact";
 import { MacCta } from "@/components/mac/mac-cta";
 import { MacFaq } from "@/components/mac/mac-faq";
@@ -48,6 +49,7 @@ export default function HomePage() {
           <MacCta />
         </main>
         <MacFooter />
+        <MacBackToTop />
         <MacWhatsApp />
       </div>
     </div>

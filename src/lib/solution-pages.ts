@@ -23,6 +23,7 @@ export const SOLUTION_PAGE_DETAILS = {
       { title: "Atos e Alterações", description: "Registre cada alteração contratual com justificativa, documentos e aprovações." },
       { title: "Monitoramento", description: "Receba alertas de vencimento e acompanhe a saúde documental pelo dashboard." },
     ],
+    ctaSecondary: "Ver Funcionalidades",
     ctaTitle: "Organize sua estrutura societária hoje",
     ctaSubtitle:
       "Elimine planilhas e pastas desorganizadas. Tenha controle total com rastreabilidade e segurança.",
@@ -70,6 +71,7 @@ export const SOLUTION_PAGE_DETAILS = {
           "Monitore as 6 certidões obrigatórias de cada prestador com semáforo visual (verde/amarelo/vermelho). Alertas automáticos 30, 15 e 7 dias antes do vencimento. Opção de bloqueio de pagamento para prestadores com documentação irregular.",
       },
     ],
+    ctaSecondary: "Ver Módulos",
     ctaTitle: "Assuma o controle dos seus contratos",
     ctaSubtitle:
       "Chega de planilhas, pastas no drive e cálculos manuais de impostos. Centralize tudo em uma plataforma inteligente.",
@@ -113,6 +115,7 @@ export const SOLUTION_PAGE_DETAILS = {
       { segment: "Cooperativas Médicas", description: "Distribuição equitativa de plantões entre cooperados com controle de produtividade." },
       { segment: "Empresas de Home Care", description: "Escalas de profissionais em domicílio com geolocalização e confirmação de presença." },
     ],
+    ctaSecondary: "Ver Funcionalidades",
     ctaTitle: "Elimine conflitos de escala hoje",
     ctaSubtitle:
       "Seus profissionais merecem previsibilidade. Sua gestão merece controle. Comece agora.",
