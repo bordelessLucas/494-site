@@ -241,7 +241,7 @@ export function DemoModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <motion.button
             type="button"
             aria-label="Fechar modal"
@@ -256,13 +256,13 @@ export function DemoModal({
             role="dialog"
             aria-modal="true"
             aria-labelledby="demo-modal-title"
-            className="safe-bottom relative z-10 flex max-h-[min(92dvh,920px)] w-full max-w-lg flex-col overflow-hidden rounded-t-[28px] border border-white/[0.08] bg-[#0c0c14] shadow-[0_24px_80px_-12px_rgba(0,0,0,0.8)] sm:rounded-[28px]"
+            className="relative z-10 flex max-h-[min(90dvh,920px)] w-full max-w-lg flex-col overflow-hidden rounded-[28px] border border-white/[0.08] bg-[#0c0c14] shadow-[0_24px_80px_-12px_rgba(0,0,0,0.8)]"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-start justify-between gap-3 border-b border-white/[0.06] px-4 py-4 sm:gap-4 sm:px-6 sm:py-5">
+            <div className="flex items-start justify-between gap-3 border-b border-white/[0.06] px-5 py-5 sm:gap-4 sm:px-6 sm:py-6">
               <div className="min-w-0">
                 <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
                   {stepLabel}
@@ -297,7 +297,7 @@ export function DemoModal({
               </button>
             </div>
 
-            <div className="overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
+            <div className="overflow-y-auto overscroll-contain px-5 py-5 sm:px-6 sm:py-6">
               {step === "personal" && (
                 <form onSubmit={handlePersonalSubmit} className="space-y-4">
                   {(
@@ -449,11 +449,16 @@ export function DemoModal({
 
               {step === "calendar" && (
                 <div className="space-y-5">
-                  <div className="flex items-center gap-2 rounded-xl bg-white/[0.03] px-4 py-3 text-sm text-zinc-400 ring-1 ring-white/[0.06]">
-                    <Calendar className="h-4 w-4 shrink-0 text-[#4d7cff]" strokeWidth={1.75} />
-                    <span>
-                      {selectedSolutionsLabel} · {formData.email}
-                    </span>
+                  <div className="flex items-start gap-3 rounded-xl bg-white/[0.02] p-4 text-sm text-zinc-400 ring-1 ring-white/[0.06]">
+                    <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-[#4d7cff]" strokeWidth={1.75} />
+                    <div className="flex min-w-0 flex-col gap-1.5 leading-snug">
+                      <p className="truncate font-medium text-zinc-300" title={formData.email}>
+                        {formData.email}
+                      </p>
+                      <p className="line-clamp-2 text-xs text-zinc-500" title={selectedSolutionsLabel || "Demonstração geral"}>
+                        {selectedSolutionsLabel || "Demonstração geral"}
+                      </p>
+                    </div>
                   </div>
 
                   {isLoadingSlots ? (
@@ -469,7 +474,7 @@ export function DemoModal({
                     <>
                       <div className="space-y-2">
                         <p className="text-sm font-medium text-zinc-300">Data preferencial</p>
-                        <div className="flex gap-2 overflow-x-auto pb-1">
+                        <div className="scrollbar-hide flex gap-2 overflow-x-auto pb-2">
                           {slots.map((slot) => {
                             const isSelected = selectedDate === slot.date;
                             return (

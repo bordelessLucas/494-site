@@ -1,7 +1,7 @@
 "use client";
 
 import { WHATSAPP_URL } from "@/lib/landing-data";
-import { MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 
 export function MacWhatsApp() {
   return (
@@ -13,7 +13,7 @@ export function MacWhatsApp() {
       aria-label="Fale conosco pelo WhatsApp"
       title="Fale conosco pelo WhatsApp"
     >
-      <MessageCircle className="h-6 w-6" strokeWidth={1.75} />
+      <WhatsAppIcon className="h-6 w-6" />
     </a>
   );
 }
